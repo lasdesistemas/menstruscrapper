@@ -10,6 +10,17 @@
   version = "v1.1.1"
 
 [[projects]]
+  digest = "1:f666fe2f09cc621ab3505ce7cd6437dfb01c4d2ace1ac3fd6b550bcf44663e53"
+  name = "github.com/golang/mock"
+  packages = [
+    "mockgen",
+    "mockgen/model",
+  ]
+  pruneopts = "UT"
+  revision = "51421b967af1f557f93a59e0057aaf15ca02e29c"
+  version = "v1.2.0"
+
+[[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
@@ -26,12 +37,10 @@
   version = "v0.1.1"
 
 [[projects]]
-  digest = "1:79c7e1dc6789fc4329a52a4f502cb71fb5d44eccbc665f6f7907c8cc06e48441"
+  digest = "1:0bcc464dabcfad5393daf87c3f8142911d0f6c52569b837e91a1c15e890265f3"
   name = "github.com/stretchr/testify"
   packages = [
-    ".",
     "assert",
-    "http",
     "mock",
   ]
   pruneopts = "UT"
@@ -41,6 +50,10 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/stretchr/testify"]
+  input-imports = [
+    "github.com/golang/mock/mockgen",
+    "github.com/stretchr/testify/assert",
+    "github.com/stretchr/testify/mock",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -1,6 +1,15 @@
 package menstruscrapper
 
+import (
+	"github.com/lasdesistemas/menstruscrapper/precios-claros"
+	"fmt"
+)
+
 type Client interface {
+	ObtenerSucursales() ([]string, error)
+	ObtenerListaDeTampones(sucursales []string) ([]int, error)
+	ObtenerListaDeToallitas(sucursales []string) ([]int, error)
+	ObtenerListaDePrecios(sucursales []string, productos []int) ([]*preciosclaros.Producto, error)
 }
 
 type Scrapper struct {
@@ -8,23 +17,51 @@ type Scrapper struct {
 }
 
 func New(c Client) *Scrapper {
-	return &Scrapper{}
+	return &Scrapper{c}
 }
 
 func (s *Scrapper) GenerarListaDePrecios() string {
-	/*
-		sucursales := s.client.ObtenerSucursales()
 
-		tampones := s.client.ObtenerListaDeTampones(sucursales)
+	sucursales, errSucursales := s.client.ObtenerSucursales()
+	if errSucursales != nil {
+		fmt.Errorf("No se pudieron obtener las sucursales: %s", errSucursales.Error())
+		return ""
+	}
 
-		toallitas := s.client.ObtenerListaDeToallitas(sucursales)
+	tampones, errTampones := s.client.ObtenerListaDeTampones(sucursales)
+	if errTampones != nil {
+		fmt.Errorf("No se pudo obtener la lista de ids de tampones: %s", errTampones.Error())
+		return ""
+	}
 
-		preciosTampones := s.client.ObtenerListaDePrecios(sucursales, tampones)
-		preciosToallitas := s.client.ObtenerListaDePrecios(sucursales, toallitas)
+	toallitas, errToallitas := s.client.ObtenerListaDeToallitas(sucursales)
+	if errToallitas != nil {
+		fmt.Errorf("No se pudo obtener la lista de ids de toallitas: %s", errToallitas.Error())
+		return ""
+	}
 
-		rutaCsv := s.generarCsv(preciosTampones, preciosToallitas)
+	preciosTampones, errPreciosTampones := s.client.ObtenerListaDePrecios(sucursales, tampones)
+	if errPreciosTampones != nil {
+		fmt.Errorf("No se pudo obtener la lista de precios de tampones: %s", errPreciosTampones.Error())
+		return ""
+	}
 
-		return rutaCsv*/
+	preciosToallitas, errPreciosToallitas := s.client.ObtenerListaDePrecios(sucursales, toallitas)
+	if errPreciosToallitas != nil {
+		fmt.Errorf("No se pudo obtener la lista de precios de toallitas: %s", errPreciosToallitas.Error())
+		return ""
+	}
 
-	return ""
+	rutaCsv, errCsv := s.generarCsv(preciosTampones, preciosToallitas)
+	if errCsv != nil {
+		fmt.Errorf("No se pudo generar el csv con los precios: %s", errCsv.Error())
+		return ""
+	}
+
+	return rutaCsv
+}
+
+func (s *Scrapper) generarCsv(preciosTampones, preciosToallitas []*preciosclaros.Producto) (string, error) {
+
+	return "", nil
 }
