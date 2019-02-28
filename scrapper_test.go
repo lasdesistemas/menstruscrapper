@@ -13,7 +13,7 @@ import (
 
 func TestGenerarListaDePrecios(t *testing.T) {
 
-	// mock the client
+	// Inicialización
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockClient := mocks.NewMockClient(mockCtrl)
@@ -24,8 +24,10 @@ func TestGenerarListaDePrecios(t *testing.T) {
 
 	scrapper := menstruscrapper.New(mockClient)
 
+	// Operación
 	pathCsvGenerado := scrapper.GenerarListaDePrecios()
 
+	// Validación
 	generaElCsvEsperado(t, pathCsvGenerado, pathCsvEsperado)
 }
 

@@ -3,6 +3,8 @@ package menstruscrapper
 import (
 	"github.com/lasdesistemas/menstruscrapper/precios-claros"
 	"fmt"
+	"strings"
+	"io/ioutil"
 )
 
 type Client interface {
@@ -24,25 +26,25 @@ func (s *Scrapper) GenerarListaDePrecios() string {
 
 	sucursales, errSucursales := s.client.ObtenerSucursales()
 	if errSucursales != nil {
-		fmt.Errorf("No se pudieron obtener las sucursales: %s", errSucursales.Error())
+		fmt.Printf("No se pudieron obtener las sucursales: %s", errSucursales.Error())
 		return ""
 	}
 
 	tampones, errTampones := s.client.ObtenerListaDeTampones(sucursales)
 	if errTampones != nil {
-		fmt.Errorf("No se pudo obtener la lista de ids de tampones: %s", errTampones.Error())
+		fmt.Printf("No se pudo obtener la lista de ids de tampones: %s", errTampones.Error())
 		return ""
 	}
 
 	toallitas, errToallitas := s.client.ObtenerListaDeToallitas(sucursales)
 	if errToallitas != nil {
-		fmt.Errorf("No se pudo obtener la lista de ids de toallitas: %s", errToallitas.Error())
+		fmt.Printf("No se pudo obtener la lista de ids de toallitas: %s", errToallitas.Error())
 		return ""
 	}
 
 	preciosTampones, errPreciosTampones := s.client.ObtenerListaDePrecios(sucursales, tampones)
 	if errPreciosTampones != nil {
-		fmt.Errorf("No se pudo obtener la lista de precios de tampones: %s", errPreciosTampones.Error())
+		fmt.Printf("No se pudo obtener la lista de precios de tampones: %s", errPreciosTampones.Error())
 		return ""
 	}
 
@@ -63,5 +65,21 @@ func (s *Scrapper) GenerarListaDePrecios() string {
 
 func (s *Scrapper) generarCsv(preciosTampones, preciosToallitas []*preciosclaros.Producto) (string, error) {
 
-	return "", nil
+	listaDePrecios := "Categoría,Marca,Nombre,Presentación,Comercio,Sucursal,Dirección,Localidad,Precio de lista\n"
+
+	for _, producto := range preciosTampones {
+
+		linea := strings.Join([]string{producto.Categoria, producto.Marca, producto.Nombre, producto.Presentacion, producto.Comercio,
+			producto.Sucursal, producto.Direccion, producto.Localidad, fmt.Sprintf("%.2f", producto.PrecioDeLista)},",")
+
+		listaDePrecios = listaDePrecios + linea + "\n"
+	}
+
+	errWrite := ioutil.WriteFile("precios-gestion-menstrual.csv", []byte(listaDePrecios), 0644)
+
+	if errWrite != nil {
+		return "", fmt.Errorf("No se pudo escribir en el csv: %s", errWrite.Error())
+	}
+
+	return "precios-gestion-menstrual.csv", nil
 }
