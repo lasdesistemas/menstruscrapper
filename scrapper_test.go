@@ -32,6 +32,27 @@ func TestGenerarListaDePreciosCuandoSoloHayTampones(t *testing.T) {
 	generaElCsvEsperado(t, pathCsvGenerado, pathCsvEsperado)
 }
 
+func TestGenerarListaDePreciosCuandoSoloHayToallitas(t *testing.T) {
+
+	// Inicialización
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockClient := mocks.NewMockClient(mockCtrl)
+	preciosToallitas := generarListaDePreciosToallitas()
+	idsToallitas := []int{7501065922755}
+	inicializarMockClient(mockClient, nil, preciosToallitas, nil, idsToallitas)
+
+	pathCsvEsperado := "archivos-test/esperados/precios-solo-toallitas.csv"
+
+	scrapper := menstruscrapper.New(mockClient)
+
+	// Operación
+	pathCsvGenerado := scrapper.GenerarListaDePrecios()
+
+	// Validación
+	generaElCsvEsperado(t, pathCsvGenerado, pathCsvEsperado)
+}
+
 func TestGenerarListaDePreciosCuandoHayTamponesYToallitas(t *testing.T) {
 
 	// Inicialización
