@@ -11,16 +11,17 @@ import (
 	"github.com/lasdesistemas/menstruscrapper/mocks"
 )
 
-func TestGenerarListaDePrecios(t *testing.T) {
+func TestGenerarListaDePreciosCuandoSoloHayTampones(t *testing.T) {
 
 	// Inicialización
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockClient := mocks.NewMockClient(mockCtrl)
-	preciosTampones := generarListaDePrecios()
-	inicializarMockClient(mockClient, preciosTampones, nil)
+	preciosTampones := generarListaDePreciosTampones()
+	idsTampones := []int{7891010604905}
+	inicializarMockClient(mockClient, preciosTampones, nil, idsTampones, nil)
 
-	pathCsvEsperado := "archivos-test/esperados/precios.csv"
+	pathCsvEsperado := "archivos-test/esperados/precios-solo-tampones.csv"
 
 	scrapper := menstruscrapper.New(mockClient)
 
@@ -31,16 +32,39 @@ func TestGenerarListaDePrecios(t *testing.T) {
 	generaElCsvEsperado(t, pathCsvGenerado, pathCsvEsperado)
 }
 
-func inicializarMockClient(mockClient *mocks.MockClient, preciosTampones, preciosToallitas []*preciosclaros.Producto) {
+func TestGenerarListaDePreciosCuandoHayTamponesYToallitas(t *testing.T) {
+
+	// Inicialización
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockClient := mocks.NewMockClient(mockCtrl)
+	preciosTampones := generarListaDePreciosTampones()
+	preciosToallitas := generarListaDePreciosToallitas()
+	idsTampones := []int{7891010604905}
+	idsToallitas := []int{7501065922755}
+	inicializarMockClient(mockClient, preciosTampones, preciosToallitas, idsTampones, idsToallitas)
+
+	pathCsvEsperado := "archivos-test/esperados/precios-tampones-y-toallitas.csv"
+
+	scrapper := menstruscrapper.New(mockClient)
+
+	// Operación
+	pathCsvGenerado := scrapper.GenerarListaDePrecios()
+
+	// Validación
+	generaElCsvEsperado(t, pathCsvGenerado, pathCsvEsperado)
+}
+
+func inicializarMockClient(mockClient *mocks.MockClient, preciosTampones, preciosToallitas []*preciosclaros.Producto,
+	tampones []int, toallitas []int) {
 
 	sucursales := []string{"15-1-1803", "15-1-8009"}
-	tampones := []int{7891010604905}
 
 	mockClient.EXPECT().ObtenerSucursales().Return(sucursales,nil)
 	mockClient.EXPECT().ObtenerListaDeTampones(sucursales).Return(tampones, nil)
-	mockClient.EXPECT().ObtenerListaDeToallitas(sucursales).Return(nil, nil)
+	mockClient.EXPECT().ObtenerListaDeToallitas(sucursales).Return(toallitas, nil)
 	primero := mockClient.EXPECT().ObtenerListaDePrecios(sucursales, tampones).Return(preciosTampones, nil)
-	segundo := mockClient.EXPECT().ObtenerListaDePrecios(sucursales, nil).Return(preciosToallitas, nil)
+	segundo := mockClient.EXPECT().ObtenerListaDePrecios(sucursales, toallitas).Return(preciosToallitas, nil)
 
 	gomock.InOrder(primero, segundo)
 }
@@ -55,7 +79,7 @@ func generaElCsvEsperado(t *testing.T, pathCsvObtenido string, pathCsvEsperado s
 	assert.Nil(t, errCsvEsperado)
 }
 
-func generarListaDePrecios() []*preciosclaros.Producto {
+func generarListaDePreciosTampones() []*preciosclaros.Producto {
 
 	var productos []*preciosclaros.Producto
 
@@ -70,4 +94,18 @@ func generarListaDePrecios() []*preciosclaros.Producto {
 	return append(productos, &unTampon, &otroTampon)
 }
 
+func generarListaDePreciosToallitas() []*preciosclaros.Producto {
+
+	var productos []*preciosclaros.Producto
+
+	unaToallita := preciosclaros.Producto{"Toallitas","ALWAYS","Toallas Femeninas Ultrafinas flexialas Always 8 Un",
+		"8.0 un","DIA Argentina S.A","1803 - Salta","Radio Patagonia 0",
+		"Salta",71.79}
+
+	otraToallita := preciosclaros.Producto{"Toallitas","ALWAYS","Toallas Femeninas Ultrafinas flexialas Always 8 Un",
+		"8.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
+		"Salta",71.79}
+
+	return append(productos, &unaToallita, &otraToallita)
+}
 

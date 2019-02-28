@@ -67,13 +67,8 @@ func (s *Scrapper) generarCsv(preciosTampones, preciosToallitas []*preciosclaros
 
 	listaDePrecios := "Categoría,Marca,Nombre,Presentación,Comercio,Sucursal,Dirección,Localidad,Precio de lista\n"
 
-	for _, producto := range preciosTampones {
-
-		linea := strings.Join([]string{producto.Categoria, producto.Marca, producto.Nombre, producto.Presentacion, producto.Comercio,
-			producto.Sucursal, producto.Direccion, producto.Localidad, fmt.Sprintf("%.2f", producto.PrecioDeLista)},",")
-
-		listaDePrecios = listaDePrecios + linea + "\n"
-	}
+	listaDePrecios = generarListaDePrecios(preciosTampones, listaDePrecios)
+	listaDePrecios = generarListaDePrecios(preciosToallitas, listaDePrecios)
 
 	errWrite := ioutil.WriteFile("precios-gestion-menstrual.csv", []byte(listaDePrecios), 0644)
 
@@ -82,4 +77,17 @@ func (s *Scrapper) generarCsv(preciosTampones, preciosToallitas []*preciosclaros
 	}
 
 	return "precios-gestion-menstrual.csv", nil
+}
+
+func generarListaDePrecios(productos []*preciosclaros.Producto, listaDePrecios string) string {
+
+	for _, producto := range productos {
+
+		linea := strings.Join([]string{producto.Categoria, producto.Marca, producto.Nombre, producto.Presentacion, producto.Comercio,
+			producto.Sucursal, producto.Direccion, producto.Localidad, fmt.Sprintf("%.2f", producto.PrecioDeLista)}, ",")
+
+		listaDePrecios = listaDePrecios + linea + "\n"
+	}
+
+	return listaDePrecios
 }
