@@ -23,7 +23,8 @@ func TestObtenerSucursales(t *testing.T) {
 	sucursalesEsperadas := []string{"15-1-1803", "15-1-8009"}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl)
+
+	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/sucursales.json", sucursales)
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -42,7 +43,7 @@ func TestObtenerListaDeTampones(t *testing.T) {
 	sucursales:= []string{"15-1-1803", "15-1-8009"}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClientTampones(mockCtrl)
+	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/tampones.json", tampones)
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -53,20 +54,11 @@ func TestObtenerListaDeTampones(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func inicializarMockRestClient(mockCtrl *gomock.Controller) *mock_precios_claros.MockRestClient {
+func inicializarMockRestClient(mockCtrl *gomock.Controller, path string, url string) *mock_precios_claros.MockRestClient {
 	mockRestClient := mock_precios_claros.NewMockRestClient(mockCtrl)
-	sucursalesJson, _ := ioutil.ReadFile("../archivos-test/sucursales.json")
-	body := ioutil.NopCloser(bytes.NewReader(sucursalesJson))
+	json, _ := ioutil.ReadFile(path)
+	body := ioutil.NopCloser(bytes.NewReader(json))
 	respuesta := &http.Response{StatusCode: http.StatusOK, Body: body}
-	mockRestClient.EXPECT().Get(host + sucursales).Return(respuesta, nil)
-	return mockRestClient
-}
-
-func inicializarMockRestClientTampones(mockCtrl *gomock.Controller) *mock_precios_claros.MockRestClient {
-	mockRestClient := mock_precios_claros.NewMockRestClient(mockCtrl)
-	tamponesJson, _ := ioutil.ReadFile("../archivos-test/tampones.json")
-	body := ioutil.NopCloser(bytes.NewReader(tamponesJson))
-	respuesta := &http.Response{StatusCode: http.StatusOK, Body: body}
-	mockRestClient.EXPECT().Get(host + tampones).Return(respuesta, nil)
+	mockRestClient.EXPECT().Get(host + url).Return(respuesta, nil)
 	return mockRestClient
 }
