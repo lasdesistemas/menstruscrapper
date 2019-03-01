@@ -104,11 +104,11 @@ func generarListaDePreciosTampones() []*preciosclaros.Producto {
 
 	var productos []*preciosclaros.Producto
 
-	unTampon := preciosclaros.Producto{"Tampones","OB","Tampones Medio Helix Ob 20 Un",
+	unTampon := preciosclaros.Producto{"7891010604905", "Tampones","OB","Tampones Medio Helix Ob 20 Un",
 	"20.0 un","DIA Argentina S.A","1803 - Salta","Radio Patagonia 0",
 	"Salta",136.49}
 
-	otroTampon := preciosclaros.Producto{"Tampones","OB","Tampones Medio Helix Ob 20 Un",
+	otroTampon := preciosclaros.Producto{"7891010604905", "Tampones","OB","Tampones Medio Helix Ob 20 Un",
 		"20.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
 		"Salta",136.49}
 
@@ -119,11 +119,11 @@ func generarListaDePreciosToallitas() []*preciosclaros.Producto {
 
 	var productos []*preciosclaros.Producto
 
-	unaToallita := preciosclaros.Producto{"Toallitas","ALWAYS","Toallas Femeninas Ultrafinas flexialas Always 8 Un",
+	unaToallita := preciosclaros.Producto{"7501065922755", "Toallitas","ALWAYS","Toallas Femeninas Ultrafinas flexialas Always 8 Un",
 		"8.0 un","DIA Argentina S.A","1803 - Salta","Radio Patagonia 0",
 		"Salta",71.79}
 
-	otraToallita := preciosclaros.Producto{"Toallitas","ALWAYS","Toallas Femeninas Ultrafinas flexialas Always 8 Un",
+	otraToallita := preciosclaros.Producto{"7501065922755", "Toallitas","ALWAYS","Toallas Femeninas Ultrafinas flexialas Always 8 Un",
 		"8.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
 		"Salta",71.79}
 

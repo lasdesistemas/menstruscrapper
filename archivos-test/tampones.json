@@ -1,0 +1,73 @@
+{
+  "status": 200,
+  "total": 7,
+  "maxLimitPermitido": 100,
+  "maxCantSucursalesPermitido": 50,
+  "productos": [
+    {
+      "marca": "OB",
+      "id": "7891010604882",
+      "precioMax": 80.29,
+      "precioMin": 80.29,
+      "nombre": "Tampones Super Helix Ob 10 Un",
+      "presentacion": "10.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "OB",
+      "id": "7891010604943",
+      "precioMax": 90.99,
+      "precioMin": 90.99,
+      "nombre": "Tampones Medio Pro Comfort Ob 10 Un",
+      "presentacion": "10.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "OB",
+      "id": "7891010604905",
+      "precioMax": 136.49,
+      "precioMin": 136.49,
+      "nombre": "Tampones Medio Helix Ob 20 Un",
+      "presentacion": "20.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "OB",
+      "id": "7891010604912",
+      "precioMax": 136.49,
+      "precioMin": 136.49,
+      "nombre": "Tampones Super Helix Ob 20 Un",
+      "presentacion": "20.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "BONTÉ",
+      "id": "8480017134790",
+      "precioMax": 77.99,
+      "precioMin": 77.99,
+      "nombre": "Tampon Super Bonte 20 Un",
+      "presentacion": "20.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "BONTÉ",
+      "id": "8480017184924",
+      "precioMax": 77.99,
+      "precioMin": 77.99,
+      "nombre": "Tampones Medianos Bonte 20 Un",
+      "presentacion": "20.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "OB",
+      "id": "7891010604813",
+      "precioMax": 80.29,
+      "precioMin": 80.29,
+      "nombre": "Tampones Medio con Canales Protectores Ob 10 Un",
+      "presentacion": "10.0 un",
+      "cantSucursalesDisponible": 2
+    }
+  ],
+  "totalPagina": 7,
+  "agrupables": []
+}

@@ -1,6 +1,7 @@
 package preciosclaros
 
 type Producto struct {
+	Id string
 	Categoria string
 	Marca string
 	Nombre string
