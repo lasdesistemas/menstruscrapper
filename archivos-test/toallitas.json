@@ -1,0 +1,235 @@
+{
+  "status": 200,
+  "total": 25,
+  "maxLimitPermitido": 100,
+  "maxCantSucursalesPermitido": 50,
+  "productos": [
+    {
+      "marca": "ALWAYS",
+      "id": "7501065922755",
+      "precioMax": 71.79,
+      "precioMin": 71.79,
+      "nombre": "Toallas Femeninas Ultrafinas flexialas Always 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "LINA",
+      "id": "7793620003386",
+      "precioMax": 67.99,
+      "precioMin": 67.99,
+      "nombre": "Toalla Femenina Normal con Alas Lina 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010614856",
+      "precioMax": 108.79,
+      "precioMin": 108.79,
+      "nombre": "Toalla Fem Termocontrol con Alas Siempre Libre 16U",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7500435140560",
+      "precioMax": 58.99,
+      "precioMin": 58.99,
+      "nombre": "Toallas Femeninas Nocturas Always 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7506339393804",
+      "precioMax": 129.19,
+      "precioMin": 129.19,
+      "nombre": "Toalla Femenina Maxima Proteccion Ultra Seca Always 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "BONTÉ",
+      "id": "8480017180032",
+      "precioMax": 32.99,
+      "precioMin": 32.99,
+      "nombre": "Toallas Femeninas con Alas Nocturnas Bonte 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010669061",
+      "precioMax": 46.79,
+      "precioMin": 46.79,
+      "nombre": "Toalla Femenina Especial Adapt con Alas Siempre Libre 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010599283",
+      "precioMax": 125.39,
+      "precioMin": 125.39,
+      "nombre": "Toallitas Higienicas Siempre Libre con Alas 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7891010607135",
+      "precioMax": 127.39,
+      "precioMin": 127.39,
+      "nombre": "Toalla Femenina Max Suave Nocturna con Alas Siempre Libre 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7506339391558",
+      "precioMax": 64.99,
+      "precioMin": 64.99,
+      "nombre": "Toalla Femenina Maxi Proteccion Nocturna Suave con Alas Always 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "KOTEX",
+      "id": "7793620003249",
+      "precioMax": 41.99,
+      "precioMin": 41.99,
+      "nombre": "Toalla Femenina Normal con Alas Kotex 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7506339356939",
+      "precioMax": 94.69,
+      "precioMin": 94.69,
+      "nombre": "Toalla Femenina Maxi Proteccion Nocturna Seca con Alas Always 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010599269",
+      "precioMax": 63.29,
+      "precioMin": 63.29,
+      "nombre": "Toalla Femenina Tanga con Alas Siempre Libre 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "KOTEX",
+      "id": "7793620003263",
+      "precioMax": 152.99,
+      "precioMin": 152.99,
+      "nombre": "Toalla Femenina Normal con Alas Kotex 32 Un",
+      "presentacion": "32.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010596602",
+      "precioMax": 108.89,
+      "precioMin": 108.89,
+      "nombre": "Toalla Femenina Fit con Alas Siempre Libre 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "PLENITUD",
+      "id": "7794626008559",
+      "precioMax": 249.59,
+      "precioMin": 249.59,
+      "nombre": "Toallas Incontinencia Normal con Alas Plenitud Femme 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010669085",
+      "precioMax": 54.69,
+      "precioMin": 54.69,
+      "nombre": "Toalla Femenina Ultrafina con Alas Siempre Libre 8 Uni",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7500435023306",
+      "precioMax": 80.79,
+      "precioMin": 80.79,
+      "nombre": "Toalla Femenina Plus Seca con Alas Always 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7500435023290",
+      "precioMax": 46.99,
+      "precioMin": 46.99,
+      "nombre": "Toalla Femenina Plus Seca con Alas Always 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "KOTEX",
+      "id": "7793620003256",
+      "precioMax": 103.19,
+      "precioMin": 103.19,
+      "nombre": "Toalla Femenina Normal con Alas Kotex 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7790010669078",
+      "precioMax": 80.49,
+      "precioMin": 80.49,
+      "nombre": "Toalla Femenina Especial Super Absorcion Siempre Libre X16Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "KOTEX",
+      "id": "7793620003232",
+      "precioMax": 74.99,
+      "precioMin": 74.99,
+      "nombre": "Toalla Femenina Nocturna con Alas Kotex 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "SIEMPRE LIBRE",
+      "id": "7891010599294",
+      "precioMax": 77.99,
+      "precioMin": 77.99,
+      "nombre": "Toalla Femenina Nocturna con Alas Siempre Libre 8U",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "ALWAYS",
+      "id": "7500435023337",
+      "precioMax": 68.69,
+      "precioMin": 68.69,
+      "nombre": "Toalla Femenina Plus Suave con Alas Always 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "DÍA",
+      "id": "8480017775313",
+      "precioMax": 24.99,
+      "precioMin": 24.99,
+      "nombre": "Toalla Femenina Superanatural Dia 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    }
+  ],
+  "totalPagina": 25,
+  "agrupables": []
+}

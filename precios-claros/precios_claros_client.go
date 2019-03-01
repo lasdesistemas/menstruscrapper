@@ -21,6 +21,7 @@ const (
 	host = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
 	sucursales = "/sucursales"
 	tampones = "/productos&id_categoria=090215"
+	toallitas = "/productos&id_categoria=090216"
 )
 
 func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
@@ -105,4 +106,50 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 	}
 
 	return tampones, nil
+}
+
+func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]int, error) {
+
+	sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
+
+	response, err := pc.restClient.Get(host + toallitas + sucursalesQueryString)
+	defer response.Body.Close()
+
+	// Valida el resultado
+	if err != nil {
+		return nil, err
+	}
+
+	if response.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
+	}
+
+	// Obtengo la respuesta
+	bodyBytes, errRead := ioutil.ReadAll(response.Body)
+
+	if errRead != nil {
+		return nil, fmt.Errorf("error al leer la respuesta: %v", errRead)
+	}
+
+	respuesta := struct {
+		Total int `json:"total"`
+		Productos []*Producto
+	}{0, []*Producto{}}
+
+	json.Unmarshal(bodyBytes, &respuesta)
+
+	// Convierto a lista de int
+	toallitas := []int{}
+	for _, producto := range respuesta.Productos {
+		id, err := strconv.Atoi(producto.Id)
+
+		if err == nil {
+			toallitas = append(toallitas, id)
+		} else {
+			fmt.Println("No se pudo convertir a int el id de producto: ", producto.Id)
+		}
+
+	}
+
+	return toallitas, nil
 }
