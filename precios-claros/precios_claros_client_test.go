@@ -86,7 +86,7 @@ func TestObtenerListaDePreciosDeUnProducto(t *testing.T) {
 	tampones := []int{7891010604905}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones.json"},
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905.json"},
 	[]string{fmt.Sprintf(producto, 7891010604905)})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
@@ -106,7 +106,7 @@ func TestObtenerListaDePreciosDeMasDeUnProducto(t *testing.T) {
 	tampones := []int{7891010604905, 7891010604943}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones.json",
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905.json",
 	"../archivos-test/precios-tampones-7891010604943.json"},
 		[]string{fmt.Sprintf(producto, 7891010604905), fmt.Sprintf(producto, 7891010604943)})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
