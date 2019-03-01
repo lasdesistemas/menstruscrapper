@@ -1,0 +1,38 @@
+{
+  "status": 200,
+  "totalPagina": 2,
+  "total": 2716,
+  "sucursales": [
+    {
+      "banderaId": 1,
+      "lat": "-24.847714",
+      "lng": "-65.450626",
+      "sucursalNombre": "1803 - Salta",
+      "id": "15-1-1803",
+      "sucursalTipo": "Supermercado",
+      "provincia": "AR-A",
+      "direccion": "Radio Patagonia 0",
+      "banderaDescripcion": "Supermercados DIA",
+      "localidad": "Salta",
+      "comercioRazonSocial": "DIA Argentina S.A",
+      "comercioId": 15,
+      "sucursalId": "1803"
+    },
+    {
+      "banderaId": 1,
+      "lat": "-24.9856165",
+      "lng": "-65.5777397",
+      "sucursalNombre": "8009 - Salta",
+      "id": "15-1-8009",
+      "sucursalTipo": "Autoservicio",
+      "provincia": "AR-A",
+      "direccion": "Sarmiento 0",
+      "banderaDescripcion": "Supermercados DIA",
+      "localidad": "Salta",
+      "comercioRazonSocial": "DIA Argentina S.A",
+      "comercioId": 15,
+      "sucursalId": "8009"
+    }
+  ],
+  "maxLimitPermitido": 30
+}
