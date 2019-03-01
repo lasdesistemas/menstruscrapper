@@ -208,7 +208,13 @@ func (pc *PreciosClarosClient) generarRenglonProducto(sucursal *Sucursal, produc
 	precioProducto := Producto{}
 
 	precioProducto = producto
-	precioProducto.Categoria = "Gestión menstrual"
+
+	if strings.Contains(strings.ToLower(precioProducto.Nombre), "tampon") {
+		precioProducto.Categoria = "Tampones"
+	} else {
+		precioProducto.Categoria = "Toallitas"
+	}
+
 	precioProducto.Comercio = sucursal.Comercio
 	precioProducto.Sucursal = sucursal.Nombre
 	precioProducto.Direccion = sucursal.Direccion

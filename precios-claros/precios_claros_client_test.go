@@ -111,11 +111,11 @@ func generarListaDePreciosTampones() []*preciosclaros.Producto {
 
 	var productos []*preciosclaros.Producto
 
-	unTampon := preciosclaros.Producto{"7891010604905", "Gestión menstrual","OB","Tampones Medio Helix Ob 20 Un",
+	unTampon := preciosclaros.Producto{"7891010604905", "Tampones","OB","Tampones Medio Helix Ob 20 Un",
 		"20.0 un","DIA Argentina S.A","1803 - Salta","Radio Patagonia 0",
 		"Salta",136.49}
 
-	otroTampon := preciosclaros.Producto{"7891010604905", "Gestión menstrual","OB","Tampones Medio Helix Ob 20 Un",
+	otroTampon := preciosclaros.Producto{"7891010604905", "Tampones","OB","Tampones Medio Helix Ob 20 Un",
 		"20.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
 		"Salta",136.49}
 
