@@ -1,0 +1,96 @@
+{
+  "status": 200,
+  "totalPagina": 2,
+  "producto": {
+    "precio_unitario_bulto_min_sin_iva": null,
+    "precio_bulto_min_con_iva": null,
+    "precio_unitario_bulto_max_sin_iva": null,
+    "marca": "OB",
+    "precio_bulto_max_sin_iva": null,
+    "id": "7891010604943",
+    "precio_bulto_min_sin_iva": null,
+    "precioMax": 90.99,
+    "precio_unitario_bulto_max_con_iva": null,
+    "precioMin": 90.99,
+    "nombre": "Tampones Medio Pro Comfort Ob 10 Un",
+    "precio_unitario_bulto_min_con_iva": null,
+    "precio_bulto_max_con_iva": null,
+    "presentacion": "10.0 un",
+    "cantSucursalesDisponible": 2
+  },
+  "maxLimitPermitido": 50,
+  "sucursalesConProducto": 2,
+  "total": 1330,
+  "sucursales": [
+    {
+      "banderaId": 1,
+      "unidad_venta": "",
+      "lat": "-24.847714",
+      "lng": "-65.450626",
+      "sucursalNombre": "1803 - Salta",
+      "id": "1803",
+      "sucursalTipo": "Supermercado",
+      "provincia": "AR-A",
+      "preciosProducto": {
+        "promo1": {
+          "descripcion": "",
+          "precio_unitario_sin_iva": "",
+          "precio_unitario_con_iva": "",
+          "precio": ""
+        },
+        "precio_unitario_con_iva": "",
+        "precioLista": 90.99,
+        "precio_unitario_sin_iva": "",
+        "promo2": {
+          "descripcion": "(0% de descuento).",
+          "precio_unitario_sin_iva": "",
+          "precio_unitario_con_iva": "",
+          "precio": 90.99
+        },
+        "precio_bulto_sin_iva": "",
+        "precio_bulto_con_iva": ""
+      },
+      "actualizadoHoy": true,
+      "direccion": "Radio Patagonia 0",
+      "banderaDescripcion": "Supermercados DIA",
+      "localidad": "Salta",
+      "comercioRazonSocial": "DIA Argentina S.A",
+      "comercioId": 15
+    },
+    {
+      "banderaId": 1,
+      "unidad_venta": "",
+      "lat": "-24.9856165",
+      "lng": "-65.5777397",
+      "sucursalNombre": "8009 - Salta",
+      "id": "8009",
+      "sucursalTipo": "Autoservicio",
+      "provincia": "AR-A",
+      "preciosProducto": {
+        "promo1": {
+          "descripcion": "",
+          "precio_unitario_sin_iva": "",
+          "precio_unitario_con_iva": "",
+          "precio": ""
+        },
+        "precio_unitario_con_iva": "",
+        "precioLista": 90.99,
+        "precio_unitario_sin_iva": "",
+        "promo2": {
+          "descripcion": "(0% de descuento).",
+          "precio_unitario_sin_iva": "",
+          "precio_unitario_con_iva": "",
+          "precio": 90.99
+        },
+        "precio_bulto_sin_iva": "",
+        "precio_bulto_con_iva": ""
+      },
+      "actualizadoHoy": true,
+      "direccion": "Sarmiento 0",
+      "banderaDescripcion": "Supermercados DIA",
+      "localidad": "Salta",
+      "comercioRazonSocial": "DIA Argentina S.A",
+      "comercioId": 15
+    }
+  ]
+}

@@ -27,7 +27,7 @@ func TestObtenerSucursales(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/sucursales.json", sucursales)
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/sucursales.json"}, []string{sucursales})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -46,7 +46,7 @@ func TestObtenerListaDeTampones(t *testing.T) {
 	sucursales:= []string{"15-1-1803", "15-1-8009"}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/tampones.json", tampones)
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/tampones.json"}, []string{tampones})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -67,7 +67,7 @@ func TestObtenerListaDeToallitas(t *testing.T) {
 	sucursales:= []string{"15-1-1803", "15-1-8009"}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/toallitas.json", toallitas)
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/toallitas.json"}, []string{toallitas})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -78,7 +78,7 @@ func TestObtenerListaDeToallitas(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestObtenerListaDePrecios(t *testing.T) {
+func TestObtenerListaDePreciosDeUnProducto(t *testing.T) {
 
 	// Inicialización
 	listaDePreciosEsperada := generarListaDePreciosTampones()
@@ -86,8 +86,8 @@ func TestObtenerListaDePrecios(t *testing.T) {
 	tampones := []int{7891010604905}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/precios-tampones.json",
-		fmt.Sprintf(producto, 7891010604905))
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones.json"},
+	[]string{fmt.Sprintf(producto, 7891010604905)})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -98,12 +98,42 @@ func TestObtenerListaDePrecios(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func inicializarMockRestClient(mockCtrl *gomock.Controller, path string, url string) *mock_precios_claros.MockRestClient {
+func TestObtenerListaDePreciosDeMasDeUnProducto(t *testing.T) {
+
+	// Inicialización
+	listaDePreciosEsperada := generarListaDePreciosDosTampones()
+	sucursales:= []string{"15-1-1803", "15-1-8009"}
+	tampones := []int{7891010604905, 7891010604943}
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones.json",
+	"../archivos-test/precios-tampones-7891010604943.json"},
+		[]string{fmt.Sprintf(producto, 7891010604905), fmt.Sprintf(producto, 7891010604943)})
+	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+
+	// Operación
+	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(sucursales, tampones)
+
+	// Validación
+	assert.ElementsMatch(t, listaDePreciosEsperada, listaDePreciosObtenida, "las listas de precios no son iguales")
+	assert.Nil(t, err)
+}
+
+func inicializarMockRestClient(mockCtrl *gomock.Controller, paths []string, urls []string) *mock_precios_claros.MockRestClient {
+
 	mockRestClient := mock_precios_claros.NewMockRestClient(mockCtrl)
-	json, _ := ioutil.ReadFile(path)
-	body := ioutil.NopCloser(bytes.NewReader(json))
-	respuesta := &http.Response{StatusCode: http.StatusOK, Body: body}
-	mockRestClient.EXPECT().Get(host + url).Return(respuesta, nil)
+	calls := []*gomock.Call{}
+
+	for i, path := range paths {
+		json, _ := ioutil.ReadFile(path)
+		body := ioutil.NopCloser(bytes.NewReader(json))
+		respuesta := &http.Response{StatusCode: http.StatusOK, Body: body}
+		call := mockRestClient.EXPECT().Get(host + urls[i]).Return(respuesta, nil)
+		calls = append(calls, call)
+	}
+
+	gomock.InOrder(calls...)
+
 	return mockRestClient
 }
 
@@ -118,6 +148,21 @@ func generarListaDePreciosTampones() []*preciosclaros.Producto {
 	otroTampon := preciosclaros.Producto{"7891010604905", "Tampones","OB","Tampones Medio Helix Ob 20 Un",
 		"20.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
 		"Salta",136.49}
+
+	return append(productos, &unTampon, &otroTampon)
+}
+
+func generarListaDePreciosDosTampones() []*preciosclaros.Producto {
+
+	productos := generarListaDePreciosTampones()
+
+	unTampon := preciosclaros.Producto{"7891010604943", "Tampones","OB","Tampones Medio Pro Comfort Ob 10 Un",
+		"10.0 un","DIA Argentina S.A","1803 - Salta","Radio Patagonia 0",
+		"Salta",90.99}
+
+	otroTampon := preciosclaros.Producto{"7891010604943", "Tampones","OB","Tampones Medio Pro Comfort Ob 10 Un",
+		"10.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
+		"Salta",90.99}
 
 	return append(productos, &unTampon, &otroTampon)
 }
