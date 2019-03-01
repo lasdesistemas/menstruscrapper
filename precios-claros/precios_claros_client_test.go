@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"github.com/lasdesistemas/menstruscrapper/precios-claros/mocks"
 	"github.com/lasdesistemas/menstruscrapper/precios-claros"
+	"fmt"
 )
 
 const (
@@ -16,6 +17,7 @@ const (
 	sucursales = "/sucursales"
 	tampones = "/productos&id_categoria=090215&array_sucursales=15-1-1803,15-1-8009"
 	toallitas = "/productos&id_categoria=090216&array_sucursales=15-1-1803,15-1-8009"
+	producto = "/producto&id_producto=%v&array_sucursales=15-1-1803,15-1-8009"
 )
 
 func TestObtenerSucursales(t *testing.T) {
@@ -76,6 +78,26 @@ func TestObtenerListaDeToallitas(t *testing.T) {
 	assert.Nil(t, err)
 }
 
+func TestObtenerListaDePrecios(t *testing.T) {
+
+	// Inicialización
+	listaDePreciosEsperada := generarListaDePreciosTampones()
+	sucursales:= []string{"15-1-1803", "15-1-8009"}
+	tampones := []int{7891010604905}
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockRestClient := inicializarMockRestClient(mockCtrl, "../archivos-test/precios-tampones.json",
+		fmt.Sprintf(producto, 7891010604905))
+	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+
+	// Operación
+	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(sucursales, tampones)
+
+	// Validación
+	assert.ElementsMatch(t, listaDePreciosEsperada, listaDePreciosObtenida, "las listas de precios no son iguales")
+	assert.Nil(t, err)
+}
+
 func inicializarMockRestClient(mockCtrl *gomock.Controller, path string, url string) *mock_precios_claros.MockRestClient {
 	mockRestClient := mock_precios_claros.NewMockRestClient(mockCtrl)
 	json, _ := ioutil.ReadFile(path)
@@ -83,4 +105,19 @@ func inicializarMockRestClient(mockCtrl *gomock.Controller, path string, url str
 	respuesta := &http.Response{StatusCode: http.StatusOK, Body: body}
 	mockRestClient.EXPECT().Get(host + url).Return(respuesta, nil)
 	return mockRestClient
+}
+
+func generarListaDePreciosTampones() []*preciosclaros.Producto {
+
+	var productos []*preciosclaros.Producto
+
+	unTampon := preciosclaros.Producto{"7891010604905", "Gestión menstrual","OB","Tampones Medio Helix Ob 20 Un",
+		"20.0 un","DIA Argentina S.A","1803 - Salta","Radio Patagonia 0",
+		"Salta",136.49}
+
+	otroTampon := preciosclaros.Producto{"7891010604905", "Gestión menstrual","OB","Tampones Medio Helix Ob 20 Un",
+		"20.0 un","DIA Argentina S.A","8009 - Salta","Sarmiento 0",
+		"Salta",136.49}
+
+	return append(productos, &unTampon, &otroTampon)
 }
