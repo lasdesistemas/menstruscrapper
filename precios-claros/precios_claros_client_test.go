@@ -120,6 +120,37 @@ func TestObtenerListaDePreciosDeMasDeUnProducto(t *testing.T) {
 	assert.Nil(t, err)
 }
 
+func TestObtenerSucursalesConPaginado(t *testing.T) {
+
+	// Inicialización
+	sucursalesEsperadas := []string{"11-2-1075", "16-1-1302", "15-1-8012", "15-1-8014",
+		"9-1-140", "10-1-112", "15-1-8005", "15-1-8002", "10-1-171", "10-1-175", "15-1-8007",
+		"15-1-806", "15-1-1802", "15-1-8013", "15-1-8001", "15-1-1801", "15-1-8006", "15-1-8003",
+		"15-1-8015", "6-1-18", "15-1-8010", "15-1-8016", "15-1-804", "15-1-8011", "15-1-802",
+		"15-1-8008", "15-1-1800", "15-1-803", "15-1-800", "6-1-9", "15-1-1803", "15-1-8009",
+		"15-1-801", "15-1-8004", "9-3-5251", "9-1-655", "9-1-110", "9-1-657", "9-1-656",
+		"11-2-1011", "19-1-03330", "9-1-64", "9-1-658", "9-1-731", "9-1-980", "9-1-40",
+		"6-2-21", "11-2-1052", "11-2-1078", "36-3-32", "15-1-226", "10-3-521", "15-1-126",
+		"2-1-260", "49-1-2", "13-1-111", "50-1-1", "50-1-2", "49-1-1", "12-1-67", "12-1-101",
+		"19-1-03298"}
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	sucursales := []string{"../archivos-test/sucursales-paginado-1.json",
+		"../archivos-test/sucursales-paginado-2.json", "../archivos-test/sucursales-paginado-3.json"}
+	urls := []string{"/sucursales?offset=0&limit=30", "/sucursales?offset=30&limit=30", "/sucursales?offset=60&limit=30"}
+
+	mockRestClient := inicializarMockRestClient(mockCtrl, sucursales, urls)
+	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+
+	// Operación
+	sucursalesObtenidas, err := preciosClarosClient.ObtenerSucursales()
+
+	// Validación
+	assert.Len(t, sucursalesObtenidas, 62)
+	assert.Equal(t, sucursalesEsperadas, sucursalesObtenidas, "las sucursales no son iguales")
+	assert.Nil(t, err)
+}
+
 func inicializarMockRestClient(mockCtrl *gomock.Controller, paths []string, urls []string) *mock_precios_claros.MockRestClient {
 
 	mockRestClient := mock_precios_claros.NewMockRestClient(mockCtrl)

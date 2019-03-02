@@ -1,0 +1,38 @@
+{
+    "status": 200,
+    "totalPagina": 2,
+    "total": 62,
+    "sucursales": [
+      {
+        "banderaId": 1,
+        "lat": "-34.6650066",
+        "lng": "-58.3623175",
+        "sucursalNombre": "AVELLANEDA ",
+        "id": "12-1-101",
+        "sucursalTipo": "Supermercado",
+        "provincia": "AR-B",
+        "direccion": "Italia 62",
+        "banderaDescripcion": "COTO CICSA",
+        "localidad": "Avellaneda",
+        "comercioRazonSocial": "Coto Centro Integral de Comercialización S.A.",
+        "comercioId": 12,
+        "sucursalId": "101"
+      },
+      {
+        "banderaId": 1,
+        "lat": "-34.68495",
+        "lng": "-58.30547",
+        "sucursalNombre": "AUTOPISTA SUR",
+        "id": "19-1-03298",
+        "sucursalTipo": "Autoservicio",
+        "provincia": "AR-B",
+        "direccion": "Aut Bs As-La Plata K13.500 Asc 0",
+        "banderaDescripcion": "FULL",
+        "localidad": "AVELLANEDA",
+        "comercioRazonSocial": "Operadora de Estaciones de Servicios S.A.",
+        "comercioId": 19,
+        "sucursalId": "03298"
+      }
+    ],
+    "maxLimitPermitido": 30
+  }

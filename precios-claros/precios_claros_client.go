@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"strconv"
 	"strings"
@@ -18,49 +19,70 @@ func NewClient(rc RestClient) *PreciosClarosClient {
 }
 
 const (
-	host       = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
-	sucursales = "/sucursales"
-	tampones   = "/productos&id_categoria=090215"
-	toallitas  = "/productos&id_categoria=090216"
-	producto   = "/producto"
+	host           = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
+	pathSucursales = "/sucursales"
+	tampones       = "/productos&id_categoria=090215"
+	toallitas      = "/productos&id_categoria=090216"
+	producto       = "/producto"
 )
 
 func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
 
-	response, err := pc.restClient.Get(host + sucursales)
+	sucursales := []string{}
+
+	paginas, err := pc.obtenerSucursales("0", "30", &sucursales)
+
+	if err != nil {
+		return sucursales, err
+	}
+
+	for i := 1; i <= paginas; i++ {
+		offset := strconv.Itoa(i * 30)
+		limit := "30"
+		_, err := pc.obtenerSucursales(offset, limit, &sucursales)
+
+		if err != nil {
+			return sucursales, err
+		}
+	}
+
+	return sucursales, nil
+}
+
+func (pc *PreciosClarosClient) obtenerSucursales(offset, limit string, sucursales *[]string) (int, error) {
+	response, err := pc.restClient.Get(host + pathSucursales + "?offset=" + offset + "&limit=" + limit)
 	defer response.Body.Close()
 
 	// Valida el resultado
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	if response.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
+		return 0, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
 	}
 
 	// Obtengo la respuesta
 	bodyBytes, errRead := ioutil.ReadAll(response.Body)
 
 	if errRead != nil {
-		return nil, fmt.Errorf("error al leer la respuesta: %v", errRead)
+		return 0, fmt.Errorf("error al leer la respuesta: %v", errRead)
 	}
 
 	respuesta := struct {
-		TotalPagina int `json:"total_pagina"`
+		TotalPagina int `json:"totalPagina"`
 		Total       int `json:"total"`
 		Sucursales  []*Sucursal
 	}{0, 0, []*Sucursal{}}
 
 	json.Unmarshal(bodyBytes, &respuesta)
+	paginas := int(math.Ceil(float64(respuesta.Total / respuesta.TotalPagina)))
 
-	// Convierto a lista de string
-	sucursales := []string{}
 	for _, sucursal := range respuesta.Sucursales {
-		sucursales = append(sucursales, sucursal.Id)
+		*sucursales = append(*sucursales, sucursal.Id)
 	}
 
-	return sucursales, nil
+	return paginas, nil
 }
 
 func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]int, error) {
