@@ -34,18 +34,18 @@ func (m *MockClient) EXPECT() *MockClientMockRecorder {
 }
 
 // ObtenerListaDePrecios mocks base method
-func (m *MockClient) ObtenerListaDePrecios(arg0 []string, arg1 []int) ([]*precios_claros.Producto, error) {
+func (m *MockClient) ObtenerListaDePrecios(arg0 []string, arg1 []int, arg2 string) ([]*precios_claros.Producto, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ObtenerListaDePrecios", arg0, arg1)
+	ret := m.ctrl.Call(m, "ObtenerListaDePrecios", arg0, arg1, arg2)
 	ret0, _ := ret[0].([]*precios_claros.Producto)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // ObtenerListaDePrecios indicates an expected call of ObtenerListaDePrecios
-func (mr *MockClientMockRecorder) ObtenerListaDePrecios(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockClientMockRecorder) ObtenerListaDePrecios(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ObtenerListaDePrecios", reflect.TypeOf((*MockClient)(nil).ObtenerListaDePrecios), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ObtenerListaDePrecios", reflect.TypeOf((*MockClient)(nil).ObtenerListaDePrecios), arg0, arg1, arg2)
 }
 
 // ObtenerListaDeTampones mocks base method

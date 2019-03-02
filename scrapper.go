@@ -1,17 +1,18 @@
 package menstruscrapper
 
 import (
-	"github.com/lasdesistemas/menstruscrapper/precios-claros"
 	"fmt"
-	"strings"
 	"io/ioutil"
+	"strings"
+
+	preciosclaros "github.com/lasdesistemas/menstruscrapper/precios-claros"
 )
 
 type Client interface {
 	ObtenerSucursales() ([]string, error)
 	ObtenerListaDeTampones(sucursales []string) ([]int, error)
 	ObtenerListaDeToallitas(sucursales []string) ([]int, error)
-	ObtenerListaDePrecios(sucursales []string, productos []int) ([]*preciosclaros.Producto, error)
+	ObtenerListaDePrecios(sucursales []string, productos []int, categoria string) ([]*preciosclaros.Producto, error)
 }
 
 type Scrapper struct {
@@ -42,13 +43,13 @@ func (s *Scrapper) GenerarListaDePrecios() string {
 		return ""
 	}
 
-	preciosTampones, errPreciosTampones := s.client.ObtenerListaDePrecios(sucursales, tampones)
+	preciosTampones, errPreciosTampones := s.client.ObtenerListaDePrecios(sucursales, tampones, "tampones")
 	if errPreciosTampones != nil {
 		fmt.Printf("No se pudo obtener la lista de precios de tampones: %s", errPreciosTampones.Error())
 		return ""
 	}
 
-	preciosToallitas, errPreciosToallitas := s.client.ObtenerListaDePrecios(sucursales, toallitas)
+	preciosToallitas, errPreciosToallitas := s.client.ObtenerListaDePrecios(sucursales, toallitas, "toallitas")
 	if errPreciosToallitas != nil {
 		fmt.Errorf("No se pudo obtener la lista de precios de toallitas: %s", errPreciosToallitas.Error())
 		return ""

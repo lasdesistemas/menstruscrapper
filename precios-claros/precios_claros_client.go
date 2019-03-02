@@ -1,12 +1,12 @@
 package preciosclaros
 
 import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
 	"encoding/json"
-	"strings"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"strconv"
+	"strings"
 )
 
 type PreciosClarosClient struct {
@@ -18,11 +18,11 @@ func NewClient(rc RestClient) *PreciosClarosClient {
 }
 
 const (
-	host = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
+	host       = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
 	sucursales = "/sucursales"
-	tampones = "/productos&id_categoria=090215"
-	toallitas = "/productos&id_categoria=090216"
-	producto = "/producto"
+	tampones   = "/productos&id_categoria=090215"
+	toallitas  = "/productos&id_categoria=090216"
+	producto   = "/producto"
 )
 
 func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
@@ -48,8 +48,8 @@ func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
 
 	respuesta := struct {
 		TotalPagina int `json:"total_pagina"`
-		Total int `json:"total"`
-		Sucursales []*Sucursal
+		Total       int `json:"total"`
+		Sucursales  []*Sucursal
 	}{0, 0, []*Sucursal{}}
 
 	json.Unmarshal(bodyBytes, &respuesta)
@@ -87,7 +87,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 	}
 
 	respuesta := struct {
-		Total int `json:"total"`
+		Total     int `json:"total"`
 		Productos []*Producto
 	}{0, []*Producto{}}
 
@@ -133,7 +133,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 	}
 
 	respuesta := struct {
-		Total int `json:"total"`
+		Total     int `json:"total"`
 		Productos []*Producto
 	}{0, []*Producto{}}
 
@@ -155,14 +155,14 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 	return toallitas, nil
 }
 
-func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, productos []int) ([]*Producto, error) {
+func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, productos []int, categoria string) ([]*Producto, error) {
 
 	precios := []*Producto{}
 
-	for _ , id := range productos {
+	for _, id := range productos {
 
 		sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
-		response, err := pc.restClient.Get(host + fmt.Sprintf(producto + "&id_producto=%v", id) + sucursalesQueryString)
+		response, err := pc.restClient.Get(host + fmt.Sprintf(producto+"&id_producto=%v", id) + sucursalesQueryString)
 
 		defer response.Body.Close()
 
@@ -183,18 +183,18 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 		}
 
 		respuesta := struct {
-		TotalPagina int `json:"totalPagina"`
-		Total int `json:"total"`
-		Producto *Producto
-		Sucursales []*Sucursal
-		}{0, 0,&Producto{}, []*Sucursal{}}
+			TotalPagina int `json:"totalPagina"`
+			Total       int `json:"total"`
+			Producto    *Producto
+			Sucursales  []*Sucursal
+		}{0, 0, &Producto{}, []*Sucursal{}}
 
 		json.Unmarshal(bodyBytes, &respuesta)
 
 		// Agrego cada producto con su precio y detalle de sucursal a la lista de precios
 		for _, sucursal := range respuesta.Sucursales {
 			if sucursal.PreciosProducto != nil {
-				p := pc.generarRenglonProducto(sucursal, *respuesta.Producto)
+				p := pc.generarRenglonProducto(sucursal, *respuesta.Producto, categoria)
 				precios = append(precios, p)
 			}
 		}
@@ -203,18 +203,13 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 	return precios, nil
 }
 
-func (pc *PreciosClarosClient) generarRenglonProducto(sucursal *Sucursal, producto Producto) *Producto {
+func (pc *PreciosClarosClient) generarRenglonProducto(sucursal *Sucursal, producto Producto, categoria string) *Producto {
 
 	precioProducto := Producto{}
 
 	precioProducto = producto
 
-	if strings.Contains(strings.ToLower(precioProducto.Nombre), "tampon") {
-		precioProducto.Categoria = "Tampones"
-	} else {
-		precioProducto.Categoria = "Toallitas"
-	}
-
+	precioProducto.Categoria = categoria
 	precioProducto.Comercio = sucursal.Comercio
 	precioProducto.Sucursal = sucursal.Nombre
 	precioProducto.Direccion = sucursal.Direccion
