@@ -21,7 +21,7 @@ func NewClient(rc RestClient) *PreciosClarosClient {
 const (
 	host           = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
 	pathSucursales = "/sucursales"
-	tampones       = "/productos&id_categoria=090215"
+	pathTampones   = "/productos&id_categoria=090215"
 	toallitas      = "/productos&id_categoria=090216"
 	producto       = "/producto"
 )
@@ -36,13 +36,15 @@ func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
 		return sucursales, err
 	}
 
-	for i := 1; i <= paginas; i++ {
-		offset := strconv.Itoa(i * 30)
-		limit := "30"
-		_, err := pc.obtenerSucursales(offset, limit, &sucursales)
+	if paginas > 1 {
+		for i := 1; i <= paginas; i++ {
+			offset := strconv.Itoa(i * 30)
+			limit := "30"
+			_, err := pc.obtenerSucursales(offset, limit, &sucursales)
 
-		if err != nil {
-			return sucursales, err
+			if err != nil {
+				return sucursales, err
+			}
 		}
 	}
 
@@ -73,7 +75,7 @@ func (pc *PreciosClarosClient) obtenerSucursales(offset, limit string, sucursale
 		TotalPagina int `json:"totalPagina"`
 		Total       int `json:"total"`
 		Sucursales  []*Sucursal
-	}{0, 0, []*Sucursal{}}
+	}{}
 
 	json.Unmarshal(bodyBytes, &respuesta)
 	paginas := int(math.Ceil(float64(respuesta.Total / respuesta.TotalPagina)))
@@ -87,48 +89,80 @@ func (pc *PreciosClarosClient) obtenerSucursales(offset, limit string, sucursale
 
 func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]int, error) {
 
-	sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
+	var sucursales50 []string
 
-	response, err := pc.restClient.Get(host + tampones + sucursalesQueryString)
+	if len(sucursales) >= 50 {
+		sucursales50 = sucursales[0:50]
+	} else {
+		sucursales50 = sucursales
+	}
+
+	tampones := []int{}
+
+	paginas, err := pc.obtenerTampones("0", "100", &tampones, sucursales50)
+
+	if err != nil {
+		return tampones, err
+	}
+
+	if paginas > 1 {
+		for i := 1; i <= paginas; i++ {
+			offset := strconv.Itoa(i * 100)
+			limit := "100"
+			_, err := pc.obtenerTampones(offset, limit, &tampones, sucursales50)
+
+			if err != nil {
+				return tampones, err
+			}
+		}
+	}
+
+	return tampones, nil
+}
+
+func (pc *PreciosClarosClient) obtenerTampones(offset, limit string, tampones *[]int, sucursales []string) (int, error) {
+	sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
+	response, err := pc.restClient.Get(host + pathTampones + sucursalesQueryString + "&offset=" + offset + "&limit=" + limit)
 	defer response.Body.Close()
 
 	// Valida el resultado
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	if response.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
+		return 0, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
 	}
 
 	// Obtengo la respuesta
 	bodyBytes, errRead := ioutil.ReadAll(response.Body)
 
 	if errRead != nil {
-		return nil, fmt.Errorf("error al leer la respuesta: %v", errRead)
+		return 0, fmt.Errorf("error al leer la respuesta: %v", errRead)
 	}
 
 	respuesta := struct {
-		Total     int `json:"total"`
-		Productos []*Producto
-	}{0, []*Producto{}}
+		Total       int `json:"total"`
+		TotalPagina int `json:"totalPagina"`
+		Productos   []*Producto
+	}{}
 
 	json.Unmarshal(bodyBytes, &respuesta)
 
 	// Convierto a lista de int
-	tampones := []int{}
 	for _, producto := range respuesta.Productos {
 		id, err := strconv.Atoi(producto.Id)
 
 		if err == nil {
-			tampones = append(tampones, id)
+			*tampones = append(*tampones, id)
 		} else {
 			fmt.Println("No se pudo convertir a int el id de producto: ", producto.Id)
 		}
-
 	}
 
-	return tampones, nil
+	paginas := int(math.Ceil(float64(respuesta.Total / respuesta.TotalPagina)))
+
+	return paginas, nil
 }
 
 func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]int, error) {
@@ -157,7 +191,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 	respuesta := struct {
 		Total     int `json:"total"`
 		Productos []*Producto
-	}{0, []*Producto{}}
+	}{}
 
 	json.Unmarshal(bodyBytes, &respuesta)
 
@@ -209,7 +243,7 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 			Total       int `json:"total"`
 			Producto    *Producto
 			Sucursales  []*Sucursal
-		}{0, 0, &Producto{}, []*Sucursal{}}
+		}{}
 
 		json.Unmarshal(bodyBytes, &respuesta)
 

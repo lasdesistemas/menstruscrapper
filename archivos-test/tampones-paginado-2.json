@@ -1,0 +1,910 @@
+{
+    "status": 200,
+    "total": 202,
+    "maxLimitPermitido": 100,
+    "maxCantSucursalesPermitido": 50,
+    "productos": [
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702026176341",
+        "precioMax": 68,
+        "precioMin": 47.99,
+        "nombre": "Tampon Dig Regular Nosotras 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 6
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702026176358",
+        "precioMax": 55.9,
+        "precioMin": 47.99,
+        "nombre": "Tampon Dig Super Nosotras 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 5
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702026176334",
+        "precioMax": 47.99,
+        "precioMin": 47.99,
+        "nombre": "Tampon Digi Mini Nosotras 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "EQUATE",
+        "id": "7798153712910",
+        "precioMax": 70.4,
+        "precioMin": 70.4,
+        "nombre": "Tampon Higienico Mujer Equate Medio 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "EQUATE",
+        "id": "7798153712927",
+        "precioMax": 70.4,
+        "precioMin": 70.4,
+        "nombre": "Tampon Higienico Mujer Equate Super 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620000811",
+        "precioMax": 92.9,
+        "precioMin": 81.5,
+        "nombre": "Tampon Kotex 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 11
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620000828",
+        "precioMax": 92.9,
+        "precioMin": 81.5,
+        "nombre": "Tampon Kotex 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 11
+      },
+      {
+        "marca": "ÍNTIMA",
+        "id": "0662425026821",
+        "precioMax": 29.99,
+        "precioMin": 27.98,
+        "nombre": "Tampon Mediano Intima 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 5
+      },
+      {
+        "marca": "PRIMER PRECIO",
+        "id": "0662425026753",
+        "precioMax": 69,
+        "precioMin": 45.99,
+        "nombre": "Tampon Mediano Super Intima 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 7
+      },
+      {
+        "marca": "DAYS",
+        "id": "7793620924414",
+        "precioMax": 6.19,
+        "precioMin": 6.19,
+        "nombre": "Tampon Medio Days 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "EQUATE",
+        "id": "7798270242314",
+        "precioMax": 48.4,
+        "precioMin": 48.4,
+        "nombre": "Tampon Medio Equate 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 2
+      },
+      {
+        "marca": "ÍNTIMA",
+        "id": "0662425027002",
+        "precioMax": 16.99,
+        "precioMin": 16.99,
+        "nombre": "Tampon Medio Intima 4 Un",
+        "presentacion": "4.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "PRIMER PRECIO",
+        "id": "0662425026746",
+        "precioMax": 55,
+        "precioMin": 55,
+        "nombre": "Tampon Mini Primer Precio 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "BONTÉ",
+        "id": "8480017134790",
+        "precioMax": 77.99,
+        "precioMin": 77.99,
+        "nombre": "Tampon Super Bonte 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 28
+      },
+      {
+        "marca": "EQUATE",
+        "id": "7798270242307",
+        "precioMax": 48.4,
+        "precioMin": 48.4,
+        "nombre": "Tampon Super Equate 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "SIN MARCA",
+        "id": "0662425027040",
+        "precioMax": 69,
+        "precioMin": 52.5,
+        "nombre": "Tampon Super Intima 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 5
+      },
+      {
+        "marca": "ÍNTIMA",
+        "id": "0662425027019",
+        "precioMax": 16.99,
+        "precioMin": 16.99,
+        "nombre": "Tampon Super Intima 4 Un",
+        "presentacion": "4.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "ÍNTIMA",
+        "id": "0662425026845",
+        "precioMax": 29.99,
+        "precioMin": 27.98,
+        "nombre": "Tampon Super Intima 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 6
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604806",
+        "precioMax": 87.99,
+        "precioMin": 80.39,
+        "nombre": "Tampones Canales Curvos OB Mini 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 14
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702027435355",
+        "precioMax": 155,
+        "precioMin": 155,
+        "nombre": "Tampones Edicion Limitada Medio Nosotras 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702027435447",
+        "precioMax": 112,
+        "precioMin": 112,
+        "nombre": "Tampones Edicion Limitada Super Nosotras 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "JUMBO",
+        "id": "7792052055123",
+        "precioMax": 55.9,
+        "precioMin": 55.9,
+        "nombre": "Tampones Jumbo Family Care Mp Medio en Paquete 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "JUMBO",
+        "id": "7792052046367",
+        "precioMax": 99.9,
+        "precioMin": 99.9,
+        "nombre": "Tampones Jumbo Family Care Mp Medio en Paquetex 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "JUMBO",
+        "id": "7792052055116",
+        "precioMax": 55.9,
+        "precioMin": 55.9,
+        "nombre": "Tampones Jumbo Family Care Mp Mini en Paquete 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "JUMBO",
+        "id": "7792052046350",
+        "precioMax": 99.9,
+        "precioMin": 99.9,
+        "nombre": "Tampones Jumbo Family Care Mp Super en Paquete 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "JUMBO",
+        "id": "7792052055130",
+        "precioMax": 55.9,
+        "precioMin": 55.9,
+        "nombre": "Tampones Jumbo Family Care Mp Super en Paquete 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "BONTÉ",
+        "id": "8480017184924",
+        "precioMax": 77.99,
+        "precioMin": 77.99,
+        "nombre": "Tampones Medianos Bonte 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 28
+      },
+      {
+        "marca": "CARREFOUR",
+        "id": "7791720002179",
+        "precioMax": 36,
+        "precioMin": 34,
+        "nombre": "Tampones Medio Carrefour 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604813",
+        "precioMax": 102.9,
+        "precioMin": 74.9,
+        "nombre": "Tampones Medio con Canales Protectores Ob 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 52
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620002129",
+        "precioMax": 129,
+        "precioMin": 83.29,
+        "nombre": "Tampones Medio Evolution Kotex 16 Un",
+        "presentacion": "16.0 un",
+        "cantSucursalesDisponible": 14
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620002099",
+        "precioMax": 92.9,
+        "precioMin": 53.9,
+        "nombre": "Tampones Medio Evolution Kotex 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 25
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604905",
+        "precioMax": 169,
+        "precioMin": 79.99,
+        "nombre": "Tampones Medio Helix Ob 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 56
+      },
+      {
+        "marca": "LA ANÓNIMA",
+        "id": "7798024399981",
+        "precioMax": 84.3,
+        "precioMin": 84.3,
+        "nombre": "Tampones Medio La Anonima 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "LA ANÓNIMA",
+        "id": "7798158709014",
+        "precioMax": 39.2,
+        "precioMin": 39.2,
+        "nombre": "Tampones Medio La Anonima 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "OB",
+        "id": "7891010010560",
+        "precioMax": 169,
+        "precioMin": 149,
+        "nombre": "Tampones Medio OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 11
+      },
+      {
+        "marca": "OB",
+        "id": "7891010886547",
+        "precioMax": 68,
+        "precioMin": 65.29,
+        "nombre": "Tampones Medio Ob 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "OB",
+        "id": "7891010010546",
+        "precioMax": 102.9,
+        "precioMin": 84.5,
+        "nombre": "Tampones Medio OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 8
+      },
+      {
+        "marca": "OB",
+        "id": "7891010991029",
+        "precioMax": 169,
+        "precioMin": 149,
+        "nombre": "Tampones Medio OB 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 11
+      },
+      {
+        "marca": "OB",
+        "id": "7790010963848",
+        "precioMax": 169,
+        "precioMin": 149,
+        "nombre": "Tampones Medio OB 20 Un",
+        "presentacion": "12.0 un",
+        "cantSucursalesDisponible": 11
+      },
+      {
+        "marca": "PRIMER PRECIO",
+        "id": "0662425026975",
+        "precioMax": 43.9,
+        "precioMin": 43.9,
+        "nombre": "Tampones Medio Primer Precio 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604943",
+        "precioMax": 119,
+        "precioMin": 90.99,
+        "nombre": "Tampones Medio Pro Comfort Ob 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 42
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604899",
+        "precioMax": 139.99,
+        "precioMin": 136.99,
+        "nombre": "Tampones Mini Canales Curvos Ob 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 10
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620002112",
+        "precioMax": 129,
+        "precioMin": 43.9,
+        "nombre": "Tampones Mini Evolution Kotex 16 Un",
+        "presentacion": "16.0 un",
+        "cantSucursalesDisponible": 13
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620002082",
+        "precioMax": 81.9,
+        "precioMin": 39.99,
+        "nombre": "Tampones Mini Evolution Kotex 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 9
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702027435966",
+        "precioMax": 80.59,
+        "precioMin": 37.49,
+        "nombre": "Tampones Mini Nosotras 10 Uni",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 9
+      },
+      {
+        "marca": "OB",
+        "id": "7891010010515",
+        "precioMax": 84.5,
+        "precioMin": 84.5,
+        "nombre": "Tampones Mini OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "OB",
+        "id": "7891010952976",
+        "precioMax": 97.5,
+        "precioMin": 97.5,
+        "nombre": "Tampones ProComfort OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 5
+      },
+      {
+        "marca": "OB",
+        "id": "7891010952952",
+        "precioMax": 119,
+        "precioMin": 119,
+        "nombre": "Tampones ProConfort Medio OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "OB",
+        "id": "7891010952969",
+        "precioMax": 74.9,
+        "precioMin": 74.9,
+        "nombre": "Tampones ProConfort OB Mini 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702027435300",
+        "precioMax": 64.45,
+        "precioMin": 47.3,
+        "nombre": "Tampones Regular Caja Nosotras 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "TAMPAX",
+        "id": "4015400151746",
+        "precioMax": 57.99,
+        "precioMin": 55,
+        "nombre": "Tampones Regular Tampax 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 5
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604929",
+        "precioMax": 93,
+        "precioMin": 91.19,
+        "nombre": "Tampones Silktouch Pro Comfort Mini OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 7
+      },
+      {
+        "marca": "OB",
+        "id": "7891010010577",
+        "precioMax": 102.9,
+        "precioMin": 52.8,
+        "nombre": "Tampones Star Super OB 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 15
+      },
+      {
+        "marca": "CARREFOUR",
+        "id": "7798152221093",
+        "precioMax": 79,
+        "precioMin": 79,
+        "nombre": "Tampones Super Carrefour 20 Uni",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "CARREFOUR",
+        "id": "7791720002186",
+        "precioMax": 36,
+        "precioMin": 36,
+        "nombre": "Tampones Super Carrefour 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620002136",
+        "precioMax": 118.7,
+        "precioMin": 83.29,
+        "nombre": "Tampones Super Evolution Kotex 16 Un",
+        "presentacion": "16.0 un",
+        "cantSucursalesDisponible": 11
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7793620002105",
+        "precioMax": 92.9,
+        "precioMin": 53.9,
+        "nombre": "Tampones Super Evolution Kotex 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 20
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604882",
+        "precioMax": 102.9,
+        "precioMin": 74.9,
+        "nombre": "Tampones Super Helix Ob 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 54
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604912",
+        "precioMax": 169,
+        "precioMin": 120,
+        "nombre": "Tampones Super Helix Ob 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 58
+      },
+      {
+        "marca": "LA ANÓNIMA",
+        "id": "7798024399998",
+        "precioMax": 84.3,
+        "precioMin": 84.3,
+        "nombre": "Tampones Super La Anonima 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "LA ANÓNIMA",
+        "id": "7798158709021",
+        "precioMax": 39.2,
+        "precioMin": 39.2,
+        "nombre": "Tampones Super La Anonima 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "OB",
+        "id": "7891010010591",
+        "precioMax": 169,
+        "precioMin": 149,
+        "nombre": "Tampones Super OB 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 10
+      },
+      {
+        "marca": "PRIMER PRECIO",
+        "id": "0662425026760",
+        "precioMax": 79,
+        "precioMin": 79,
+        "nombre": "Tampones Super Primer Precio 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "PRIMER PRECIO",
+        "id": "0662425026982",
+        "precioMax": 28.5,
+        "precioMin": 28.5,
+        "nombre": "Tampones Super Primer Precio 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 1
+      },
+      {
+        "marca": "OB",
+        "id": "7891010604950",
+        "precioMax": 98.99,
+        "precioMin": 91.95,
+        "nombre": "Tampones Super Pro Comfort Ob 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 16
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702027435409",
+        "precioMax": 64.45,
+        "precioMin": 47.3,
+        "nombre": "Tampones Super sin Aplic Nosotras 10 Un",
+        "presentacion": "10.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "TAMPAX",
+        "id": "4015400151715",
+        "precioMax": 57.99,
+        "precioMin": 55,
+        "nombre": "Tampones Super Tampax 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 5
+      },
+      {
+        "marca": "DAYS",
+        "id": "7793620001825",
+        "precioMax": 12.9,
+        "precioMin": 12.9,
+        "nombre": "Tampones Talle L Days 60 Un",
+        "presentacion": "60.0 un",
+        "cantSucursalesDisponible": 4
+      },
+      {
+        "marca": "VEA",
+        "id": "7790147009952",
+        "precioMax": 99.9,
+        "precioMin": 99.9,
+        "nombre": "Tampones Vea Medio en Caja 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 8
+      },
+      {
+        "marca": "VEA",
+        "id": "7790147009969",
+        "precioMax": 99.9,
+        "precioMin": 99.9,
+        "nombre": "Tampones Vea Super en Caja 20 Un",
+        "presentacion": "20.0 un",
+        "cantSucursalesDisponible": 8
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      }
+    ],
+    "totalPagina": 100,
+    "agrupables": []
+  }

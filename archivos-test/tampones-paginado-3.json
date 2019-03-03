@@ -1,0 +1,28 @@
+{
+    "status": 200,
+    "total": 202,
+    "maxLimitPermitido": 100,
+    "maxCantSucursalesPermitido": 50,
+    "productos": [
+      {
+        "marca": "KOTEX",
+        "id": "7702425540606",
+        "precioMax": 63.99,
+        "precioMin": 63.99,
+        "nombre": "Kotex Tampon Super con Aplicador 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 3
+      },
+      {
+        "marca": "NOSOTRAS",
+        "id": "7702026176341",
+        "precioMax": 68,
+        "precioMin": 47.99,
+        "nombre": "Tampon Dig Regular Nosotras 8 Un",
+        "presentacion": "8.0 un",
+        "cantSucursalesDisponible": 6
+      }
+    ],
+    "totalPagina": 2,
+    "agrupables": []
+  }
