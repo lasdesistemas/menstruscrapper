@@ -90,29 +90,33 @@ func (pc *PreciosClarosClient) obtenerSucursales(offset, limit string, sucursale
 func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]int, error) {
 
 	var sucursales50 []string
-
-	if len(sucursales) >= 50 {
-		sucursales50 = sucursales[0:50]
-	} else {
-		sucursales50 = sucursales
-	}
-
 	tampones := []int{}
 
-	paginas, err := pc.obtenerTampones("0", "100", &tampones, sucursales50)
+	for len(sucursales) > 0 {
 
-	if err != nil {
-		return tampones, err
-	}
+		if len(sucursales) > 50 {
+			sucursales50 = sucursales[0:50]
+			sucursales = sucursales[50:]
+		} else {
+			sucursales50 = sucursales
+			sucursales = nil
+		}
 
-	if paginas > 1 {
-		for i := 1; i <= paginas; i++ {
-			offset := strconv.Itoa(i * 100)
-			limit := "100"
-			_, err := pc.obtenerTampones(offset, limit, &tampones, sucursales50)
+		paginas, err := pc.obtenerTampones("0", "100", &tampones, sucursales50)
 
-			if err != nil {
-				return tampones, err
+		if err != nil {
+			return tampones, err
+		}
+
+		if paginas > 1 {
+			for i := 1; i <= paginas; i++ {
+				offset := strconv.Itoa(i * 100)
+				limit := "100"
+				_, err := pc.obtenerTampones(offset, limit, &tampones, sucursales50)
+
+				if err != nil {
+					return tampones, err
+				}
 			}
 		}
 	}
