@@ -210,47 +210,59 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 
 	precios := []*Producto{}
 
-	for _, id := range productos {
+	var sucursales50 []string
 
-		sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
-		response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"&id_producto=%v", id) + sucursalesQueryString)
+	for len(sucursales) > 0 {
 
-		defer response.Body.Close()
-
-		// Valida el resultado
-		if err != nil {
-			return nil, err
+		if len(sucursales) > 50 {
+			sucursales50 = sucursales[0:50]
+			sucursales = sucursales[50:]
+		} else {
+			sucursales50 = sucursales
+			sucursales = nil
 		}
 
-		if response.StatusCode != http.StatusOK {
-			return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
-		}
+		for _, id := range productos {
 
-		// Obtengo la respuesta
-		bodyBytes, errRead := ioutil.ReadAll(response.Body)
+			sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales50, ",") + "&limit=50"
+			response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"&id_producto=%v", id) + sucursalesQueryString)
 
-		if errRead != nil {
-			return nil, fmt.Errorf("error al leer la respuesta: %v", errRead)
-		}
+			defer response.Body.Close()
 
-		respuesta := struct {
-			TotalPagina int `json:"totalPagina"`
-			Total       int `json:"total"`
-			Producto    *Producto
-			Sucursales  []*Sucursal
-		}{}
+			// Valida el resultado
+			if err != nil {
+				return nil, err
+			}
 
-		json.Unmarshal(bodyBytes, &respuesta)
+			if response.StatusCode != http.StatusOK {
+				return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
+			}
 
-		// Agrego cada producto con su precio y detalle de sucursal a la lista de precios
-		for _, sucursal := range respuesta.Sucursales {
-			if sucursal.PreciosProducto != nil {
-				p := pc.generarRenglonProducto(sucursal, *respuesta.Producto, categoria)
-				precios = append(precios, p)
+			// Obtengo la respuesta
+			bodyBytes, errRead := ioutil.ReadAll(response.Body)
+
+			if errRead != nil {
+				return nil, fmt.Errorf("error al leer la respuesta: %v", errRead)
+			}
+
+			respuesta := struct {
+				TotalPagina int `json:"totalPagina"`
+				Total       int `json:"total"`
+				Producto    *Producto
+				Sucursales  []*Sucursal
+			}{}
+
+			json.Unmarshal(bodyBytes, &respuesta)
+
+			// Agrego cada producto con su precio y detalle de sucursal a la lista de precios
+			for _, sucursal := range respuesta.Sucursales {
+				if sucursal.PreciosProducto != nil {
+					p := pc.generarRenglonProducto(sucursal, *respuesta.Producto, categoria)
+					precios = append(precios, p)
+				}
 			}
 		}
 	}
-
 	return precios, nil
 }
 
