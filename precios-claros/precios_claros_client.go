@@ -30,6 +30,8 @@ func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
 	sucursales := []string{}
 
 	paginas, err := pc.obtenerSucursales("0", "30", &sucursales)
+	fmt.Printf("Hay %v páginas de sucursales/n", paginas)
+	fmt.Println("Obteniendo página 1...")
 
 	if err != nil {
 		return sucursales, err
@@ -37,6 +39,7 @@ func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
 
 	if paginas > 1 {
 		for i := 1; i <= paginas; i++ {
+			fmt.Printf("Obteniendo página %v.../n", i+1)
 			offset := strconv.Itoa(i * 30)
 			limit := "30"
 			_, err := pc.obtenerSucursales(offset, limit, &sucursales)
@@ -93,6 +96,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 
 	for len(sucursales) > 0 {
 
+		fmt.Printf("Buscando ids de tampones para %v sucursales.../n", len(sucursales))
 		if len(sucursales) > 50 {
 			sucursales50 = sucursales[0:50]
 			sucursales = sucursales[50:]
@@ -102,6 +106,8 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 		}
 
 		paginas, err := pc.obtenerProductos("090215", "0", "100", &tampones, sucursales50)
+		fmt.Printf("Hay %v páginas de ids de tampones/n", paginas)
+		fmt.Println("Obteniendo página 1...")
 
 		if err != nil {
 			return tampones, err
@@ -109,6 +115,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 
 		if paginas > 1 {
 			for i := 1; i <= paginas; i++ {
+				fmt.Printf("Obteniendo página %v.../n", i+1)
 				offset := strconv.Itoa(i * 100)
 				limit := "100"
 				_, err := pc.obtenerProductos("090215", offset, limit, &tampones, sucursales50)
@@ -176,6 +183,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 
 	for len(sucursales) > 0 {
 
+		fmt.Printf("Buscando ids de toallitas para %v sucursales.../n", len(sucursales))
 		if len(sucursales) > 50 {
 			sucursales50 = sucursales[0:50]
 			sucursales = sucursales[50:]
@@ -185,6 +193,8 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 		}
 
 		paginas, err := pc.obtenerProductos("090216", "0", "100", &toallitas, sucursales50)
+		fmt.Printf("Hay %v páginas de ids de toallitas/n", paginas)
+		fmt.Println("Obteniendo página 1...")
 
 		if err != nil {
 			return toallitas, err
@@ -192,6 +202,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 
 		if paginas > 1 {
 			for i := 1; i <= paginas; i++ {
+				fmt.Printf("Obteniendo página %v.../n", i+1)
 				offset := strconv.Itoa(i * 100)
 				limit := "100"
 				_, err := pc.obtenerProductos("090216", offset, limit, &toallitas, sucursales50)
@@ -214,6 +225,8 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 
 	for len(sucursales) > 0 {
 
+		fmt.Printf("Buscando precios para %v sucursales.../n", len(sucursales))
+
 		if len(sucursales) > 50 {
 			sucursales50 = sucursales[0:50]
 			sucursales = sucursales[50:]
@@ -222,7 +235,12 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 			sucursales = nil
 		}
 
-		for _, id := range productos {
+		for i, id := range productos {
+
+			resto := math.Mod(float64(i), float64(100))
+			if resto == 0 {
+				fmt.Printf("%v productos procesados ", i)
+			}
 
 			sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales50, ",") + "&limit=50"
 			response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"&id_producto=%v", id) + sucursalesQueryString)
@@ -262,6 +280,7 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 				}
 			}
 		}
+		fmt.Println("")
 	}
 	return precios, nil
 }

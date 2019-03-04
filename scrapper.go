@@ -25,41 +25,53 @@ func New(c Client) *Scrapper {
 
 func (s *Scrapper) GenerarListaDePrecios() string {
 
+	fmt.Println("Obteniendo sucursales de todo el país..")
 	sucursales, errSucursales := s.client.ObtenerSucursales()
 	if errSucursales != nil {
 		fmt.Printf("No se pudieron obtener las sucursales: %s", errSucursales.Error())
 		return ""
 	}
+	fmt.Printf("Se obtuvieron %v sucursales/n", len(sucursales))
 
+	fmt.Println("Obteniendo los ids de todos los productos de la categoría tampones..")
 	tampones, errTampones := s.client.ObtenerListaDeTampones(sucursales)
 	if errTampones != nil {
 		fmt.Printf("No se pudo obtener la lista de ids de tampones: %s", errTampones.Error())
 		return ""
 	}
+	fmt.Printf("Se obtuvieron %v ids de productos de la categoría tampones/n", len(tampones))
 
+	fmt.Println("Obteniendo los ids de todos los productos de la categoría toallitas..")
 	toallitas, errToallitas := s.client.ObtenerListaDeToallitas(sucursales)
 	if errToallitas != nil {
 		fmt.Printf("No se pudo obtener la lista de ids de toallitas: %s", errToallitas.Error())
 		return ""
 	}
+	fmt.Printf("Se obtuvieron %v ids de productos de la categoría toallitas/n", len(toallitas))
 
+	fmt.Printf("Obteniendo la lista de precios para %v sucursales de %v productos de la categoría tampones/n", len(sucursales), len(tampones))
 	preciosTampones, errPreciosTampones := s.client.ObtenerListaDePrecios(sucursales, tampones, "tampones")
 	if errPreciosTampones != nil {
-		fmt.Printf("No se pudo obtener la lista de precios de tampones: %s", errPreciosTampones.Error())
+		fmt.Printf("No se pudo obtener la lista de precios de tampones: %s/n", errPreciosTampones.Error())
 		return ""
 	}
+	fmt.Printf("Se obtuvieron %v precios de productos de la categoría tampones/n", len(preciosTampones))
 
+	fmt.Printf("Obteniendo la lista de precios para %v sucursales de %v productos de la categoría toallitas/n", len(sucursales), len(toallitas))
 	preciosToallitas, errPreciosToallitas := s.client.ObtenerListaDePrecios(sucursales, toallitas, "toallitas")
 	if errPreciosToallitas != nil {
-		fmt.Errorf("No se pudo obtener la lista de precios de toallitas: %s", errPreciosToallitas.Error())
+		fmt.Printf("No se pudo obtener la lista de precios de toallitas: %s/n", errPreciosToallitas.Error())
 		return ""
 	}
+	fmt.Printf("Se obtuvieron %v precios de productos de la categoría toallitas/n", len(preciosToallitas))
 
+	fmt.Println("Generando archivo con resultados...")
 	rutaCsv, errCsv := s.generarCsv(preciosTampones, preciosToallitas)
 	if errCsv != nil {
-		fmt.Errorf("No se pudo generar el csv con los precios: %s", errCsv.Error())
+		fmt.Printf("No se pudo generar el csv con los precios: %s/n", errCsv.Error())
 		return ""
 	}
+	fmt.Printf("Archivo generado: %s/n", rutaCsv)
 
 	return rutaCsv
 }
