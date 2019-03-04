@@ -19,11 +19,10 @@ func NewClient(rc RestClient) *PreciosClarosClient {
 }
 
 const (
-	host           = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
-	pathSucursales = "/sucursales"
-	pathTampones   = "/productos&id_categoria=090215"
-	toallitas      = "/productos&id_categoria=090216"
-	producto       = "/producto"
+	host               = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
+	pathSucursales     = "/sucursales"
+	pathProducto       = "/productos&id_categoria=%v"
+	pathPrecioProducto = "/producto"
 )
 
 func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
@@ -102,7 +101,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 			sucursales = nil
 		}
 
-		paginas, err := pc.obtenerTampones("0", "100", &tampones, sucursales50)
+		paginas, err := pc.obtenerProductos("090215", "0", "100", &tampones, sucursales50)
 
 		if err != nil {
 			return tampones, err
@@ -112,7 +111,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 			for i := 1; i <= paginas; i++ {
 				offset := strconv.Itoa(i * 100)
 				limit := "100"
-				_, err := pc.obtenerTampones(offset, limit, &tampones, sucursales50)
+				_, err := pc.obtenerProductos("090215", offset, limit, &tampones, sucursales50)
 
 				if err != nil {
 					return tampones, err
@@ -124,9 +123,10 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 	return tampones, nil
 }
 
-func (pc *PreciosClarosClient) obtenerTampones(offset, limit string, tampones *[]int, sucursales []string) (int, error) {
+func (pc *PreciosClarosClient) obtenerProductos(categoria string, offset, limit string, productos *[]int, sucursales []string) (int, error) {
 	sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
-	response, err := pc.restClient.Get(host + pathTampones + sucursalesQueryString + "&offset=" + offset + "&limit=" + limit)
+	pathProductoConCategoria := fmt.Sprintf(pathProducto, categoria)
+	response, err := pc.restClient.Get(host + pathProductoConCategoria + sucursalesQueryString + "&offset=" + offset + "&limit=" + limit)
 	defer response.Body.Close()
 
 	// Valida el resultado
@@ -158,7 +158,7 @@ func (pc *PreciosClarosClient) obtenerTampones(offset, limit string, tampones *[
 		id, err := strconv.Atoi(producto.Id)
 
 		if err == nil {
-			*tampones = append(*tampones, id)
+			*productos = append(*productos, id)
 		} else {
 			fmt.Println("No se pudo convertir a int el id de producto: ", producto.Id)
 		}
@@ -171,45 +171,36 @@ func (pc *PreciosClarosClient) obtenerTampones(offset, limit string, tampones *[
 
 func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]int, error) {
 
-	sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
-
-	response, err := pc.restClient.Get(host + toallitas + sucursalesQueryString)
-	defer response.Body.Close()
-
-	// Valida el resultado
-	if err != nil {
-		return nil, err
-	}
-
-	if response.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
-	}
-
-	// Obtengo la respuesta
-	bodyBytes, errRead := ioutil.ReadAll(response.Body)
-
-	if errRead != nil {
-		return nil, fmt.Errorf("error al leer la respuesta: %v", errRead)
-	}
-
-	respuesta := struct {
-		Total     int `json:"total"`
-		Productos []*Producto
-	}{}
-
-	json.Unmarshal(bodyBytes, &respuesta)
-
-	// Convierto a lista de int
+	var sucursales50 []string
 	toallitas := []int{}
-	for _, producto := range respuesta.Productos {
-		id, err := strconv.Atoi(producto.Id)
 
-		if err == nil {
-			toallitas = append(toallitas, id)
+	for len(sucursales) > 0 {
+
+		if len(sucursales) > 50 {
+			sucursales50 = sucursales[0:50]
+			sucursales = sucursales[50:]
 		} else {
-			fmt.Println("No se pudo convertir a int el id de producto: ", producto.Id)
+			sucursales50 = sucursales
+			sucursales = nil
 		}
 
+		paginas, err := pc.obtenerProductos("090216", "0", "100", &toallitas, sucursales50)
+
+		if err != nil {
+			return toallitas, err
+		}
+
+		if paginas > 1 {
+			for i := 1; i <= paginas; i++ {
+				offset := strconv.Itoa(i * 100)
+				limit := "100"
+				_, err := pc.obtenerProductos("090216", offset, limit, &toallitas, sucursales50)
+
+				if err != nil {
+					return toallitas, err
+				}
+			}
+		}
 	}
 
 	return toallitas, nil
@@ -222,7 +213,7 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 	for _, id := range productos {
 
 		sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales, ",")
-		response, err := pc.restClient.Get(host + fmt.Sprintf(producto+"&id_producto=%v", id) + sucursalesQueryString)
+		response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"&id_producto=%v", id) + sucursalesQueryString)
 
 		defer response.Body.Close()
 

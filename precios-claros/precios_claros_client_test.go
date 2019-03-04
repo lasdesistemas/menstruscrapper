@@ -14,12 +14,13 @@ import (
 )
 
 const (
-	host                    = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
-	sucursales              = "/sucursales?offset=0&limit=30"
-	tampones                = "/productos&id_categoria=090215&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
-	toallitas               = "/productos&id_categoria=090216&array_sucursales=15-1-1803,15-1-8009"
-	producto                = "/producto&id_producto=%v&array_sucursales=15-1-1803,15-1-8009"
-	pathTamponesConPaginado = "/productos&id_categoria=090215&array_sucursales=%v"
+	host                     = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
+	pathSucursales           = "/sucursales?offset=0&limit=30"
+	pathTampones             = "/productos&id_categoria=090215&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
+	pathToallitas            = "/productos&id_categoria=090216&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
+	pathProducto             = "/producto&id_producto=%v&array_sucursales=15-1-1803,15-1-8009"
+	pathTamponesConPaginado  = "/productos&id_categoria=090215&array_sucursales=%v"
+	pathToallitasConPaginado = "/productos&id_categoria=090216&array_sucursales=%v"
 )
 
 func TestObtenerSucursales(t *testing.T) {
@@ -29,7 +30,7 @@ func TestObtenerSucursales(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/sucursales.json"}, []string{sucursales})
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/sucursales.json"}, []string{pathSucursales})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -48,7 +49,7 @@ func TestObtenerListaDeTampones(t *testing.T) {
 	sucursales := []string{"15-1-1803", "15-1-8009"}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/tampones.json"}, []string{tampones})
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/tampones.json"}, []string{pathTampones})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -69,7 +70,7 @@ func TestObtenerListaDeToallitas(t *testing.T) {
 	sucursales := []string{"15-1-1803", "15-1-8009"}
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
-	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/toallitas.json"}, []string{toallitas})
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/toallitas.json"}, []string{pathToallitas})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -89,7 +90,7 @@ func TestObtenerListaDePreciosDeUnProducto(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905.json"},
-		[]string{fmt.Sprintf(producto, 7891010604905)})
+		[]string{fmt.Sprintf(pathProducto, 7891010604905)})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -110,7 +111,7 @@ func TestObtenerListaDePreciosDeMasDeUnProducto(t *testing.T) {
 	defer mockCtrl.Finish()
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905.json",
 		"../archivos-test/precios-tampones-7891010604943.json"},
-		[]string{fmt.Sprintf(producto, 7891010604905), fmt.Sprintf(producto, 7891010604943)})
+		[]string{fmt.Sprintf(pathProducto, 7891010604905), fmt.Sprintf(pathProducto, 7891010604943)})
 	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
 
 	// Operación
@@ -167,6 +168,34 @@ func TestObtenerListaDeTamponesConPaginado(t *testing.T) {
 	// Validación
 	assert.Len(t, tamponesObtenidos, 404)
 	assert.Equal(t, preciosclaros.TamponesEsperadosConPaginado, tamponesObtenidos, "los tampones no son iguales")
+	assert.Nil(t, err)
+}
+
+func TestObtenerListaDeToallitasConPaginado(t *testing.T) {
+
+	// Inicialización
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	toallitas := []string{"../archivos-test/toallitas-paginado-1.json",
+		"../archivos-test/toallitas-paginado-2.json", "../archivos-test/toallitas-paginado-3.json",
+		"../archivos-test/toallitas-paginado-1.json", "../archivos-test/toallitas-paginado-2.json",
+		"../archivos-test/toallitas-paginado-3.json"}
+	pagina1 := fmt.Sprintf(pathToallitasConPaginado, "11-2-1075,16-1-1302,15-1-8012,15-1-8014,9-1-140,10-1-112,15-1-8005,15-1-8002,10-1-171,10-1-175,15-1-8007,15-1-806,15-1-1802,15-1-8013,15-1-8001,15-1-1801,15-1-8006,15-1-8003,15-1-8015,6-1-18,15-1-8010,15-1-8016,15-1-804,15-1-8011,15-1-802,15-1-8008,15-1-1800,15-1-803,15-1-800,6-1-9,15-1-1803,15-1-8009,15-1-801,15-1-8004,9-3-5251,9-1-655,9-1-110,9-1-657,9-1-656,11-2-1011,19-1-03330,9-1-64,9-1-658,9-1-731,9-1-980,9-1-40,6-2-21,11-2-1052,11-2-1078,36-3-32&offset=0&limit=100")
+	pagina2 := fmt.Sprintf(pathToallitasConPaginado, "11-2-1075,16-1-1302,15-1-8012,15-1-8014,9-1-140,10-1-112,15-1-8005,15-1-8002,10-1-171,10-1-175,15-1-8007,15-1-806,15-1-1802,15-1-8013,15-1-8001,15-1-1801,15-1-8006,15-1-8003,15-1-8015,6-1-18,15-1-8010,15-1-8016,15-1-804,15-1-8011,15-1-802,15-1-8008,15-1-1800,15-1-803,15-1-800,6-1-9,15-1-1803,15-1-8009,15-1-801,15-1-8004,9-3-5251,9-1-655,9-1-110,9-1-657,9-1-656,11-2-1011,19-1-03330,9-1-64,9-1-658,9-1-731,9-1-980,9-1-40,6-2-21,11-2-1052,11-2-1078,36-3-32&offset=100&limit=100")
+	pagina3 := fmt.Sprintf(pathToallitasConPaginado, "11-2-1075,16-1-1302,15-1-8012,15-1-8014,9-1-140,10-1-112,15-1-8005,15-1-8002,10-1-171,10-1-175,15-1-8007,15-1-806,15-1-1802,15-1-8013,15-1-8001,15-1-1801,15-1-8006,15-1-8003,15-1-8015,6-1-18,15-1-8010,15-1-8016,15-1-804,15-1-8011,15-1-802,15-1-8008,15-1-1800,15-1-803,15-1-800,6-1-9,15-1-1803,15-1-8009,15-1-801,15-1-8004,9-3-5251,9-1-655,9-1-110,9-1-657,9-1-656,11-2-1011,19-1-03330,9-1-64,9-1-658,9-1-731,9-1-980,9-1-40,6-2-21,11-2-1052,11-2-1078,36-3-32&offset=200&limit=100")
+	pagina4 := fmt.Sprintf(pathToallitasConPaginado, "15-1-226,10-3-521,15-1-126,2-1-260,49-1-2,13-1-111,50-1-1,50-1-2,49-1-1,12-1-67,12-1-101,19-1-03298&offset=0&limit=100")
+	pagina5 := fmt.Sprintf(pathToallitasConPaginado, "15-1-226,10-3-521,15-1-126,2-1-260,49-1-2,13-1-111,50-1-1,50-1-2,49-1-1,12-1-67,12-1-101,19-1-03298&offset=100&limit=100")
+	pagina6 := fmt.Sprintf(pathToallitasConPaginado, "15-1-226,10-3-521,15-1-126,2-1-260,49-1-2,13-1-111,50-1-1,50-1-2,49-1-1,12-1-67,12-1-101,19-1-03298&offset=200&limit=100")
+	urls := []string{pagina1, pagina2, pagina3, pagina4, pagina5, pagina6}
+	mockRestClient := inicializarMockRestClient(mockCtrl, toallitas, urls)
+	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+
+	// Operación
+	toallitasObtenidas, err := preciosClarosClient.ObtenerListaDeToallitas(preciosclaros.Sucursales62)
+
+	// Validación
+	assert.Len(t, toallitasObtenidas, 404)
+	assert.Equal(t, preciosclaros.ToallitasEsperadasConPaginado, toallitasObtenidas, "los toallitas no son iguales")
 	assert.Nil(t, err)
 }
 

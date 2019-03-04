@@ -1,0 +1,28 @@
+{
+  "status": 200,
+  "total": 202,
+  "maxLimitPermitido": 100,
+  "maxCantSucursalesPermitido": 50,
+  "productos": [
+    {
+      "marca": "ALWAYS",
+      "id": "7501065922755",
+      "precioMax": 71.79,
+      "precioMin": 71.79,
+      "nombre": "Toallas Femeninas Ultrafinas flexialas Always 8 Un",
+      "presentacion": "8.0 un",
+      "cantSucursalesDisponible": 2
+    },
+    {
+      "marca": "LINA",
+      "id": "7793620003386",
+      "precioMax": 67.99,
+      "precioMin": 67.99,
+      "nombre": "Toalla Femenina Normal con Alas Lina 16 Un",
+      "presentacion": "16.0 un",
+      "cantSucursalesDisponible": 2
+    }
+  ],
+  "totalPagina": 2,
+  "agrupables": []
+}
