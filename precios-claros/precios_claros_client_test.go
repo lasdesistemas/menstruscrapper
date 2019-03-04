@@ -25,6 +25,10 @@ const (
 	pathProductoConPaginado  = "/producto&id_producto=%v&array_sucursales=%v&limit=50"
 )
 
+type CeroSegundos struct{}
+
+func (cs *CeroSegundos) Sleep() {
+}
 func TestObtenerSucursales(t *testing.T) {
 
 	// Inicialización
@@ -33,7 +37,7 @@ func TestObtenerSucursales(t *testing.T) {
 	defer mockCtrl.Finish()
 
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/sucursales.json"}, []string{pathSucursales})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	sucursalesObtenidas, err := preciosClarosClient.ObtenerSucursales()
@@ -52,7 +56,7 @@ func TestObtenerListaDeTampones(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/tampones.json"}, []string{pathTampones})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	tamponesObtenidos, err := preciosClarosClient.ObtenerListaDeTampones(sucursales)
@@ -73,7 +77,7 @@ func TestObtenerListaDeToallitas(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/toallitas.json"}, []string{pathToallitas})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	toallitasObtenidas, err := preciosClarosClient.ObtenerListaDeToallitas(sucursales)
@@ -93,7 +97,7 @@ func TestObtenerListaDePreciosDeUnProducto(t *testing.T) {
 	defer mockCtrl.Finish()
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905.json"},
 		[]string{fmt.Sprintf(pathProducto, 7891010604905)})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(sucursales, tampones, "Tampones")
@@ -114,7 +118,7 @@ func TestObtenerListaDePreciosDeMasDeUnProducto(t *testing.T) {
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905.json",
 		"../archivos-test/precios-tampones-7891010604943.json"},
 		[]string{fmt.Sprintf(pathProducto, 7891010604905), fmt.Sprintf(pathProducto, 7891010604943)})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(sucursales, tampones, "Tampones")
@@ -134,7 +138,7 @@ func TestObtenerSucursalesConPaginado(t *testing.T) {
 	urls := []string{"/sucursales?offset=0&limit=30", "/sucursales?offset=30&limit=30", "/sucursales?offset=60&limit=30"}
 
 	mockRestClient := inicializarMockRestClient(mockCtrl, sucursales, urls)
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	sucursalesObtenidas, err := preciosClarosClient.ObtenerSucursales()
@@ -162,7 +166,7 @@ func TestObtenerListaDeTamponesConPaginado(t *testing.T) {
 	pagina6 := fmt.Sprintf(pathTamponesConPaginado, "15-1-226,10-3-521,15-1-126,2-1-260,49-1-2,13-1-111,50-1-1,50-1-2,49-1-1,12-1-67,12-1-101,19-1-03298&offset=200&limit=100")
 	urls := []string{pagina1, pagina2, pagina3, pagina4, pagina5, pagina6}
 	mockRestClient := inicializarMockRestClient(mockCtrl, tampones, urls)
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	tamponesObtenidos, err := preciosClarosClient.ObtenerListaDeTampones(preciosclaros.Sucursales62)
@@ -190,7 +194,7 @@ func TestObtenerListaDeToallitasConPaginado(t *testing.T) {
 	pagina6 := fmt.Sprintf(pathToallitasConPaginado, "15-1-226,10-3-521,15-1-126,2-1-260,49-1-2,13-1-111,50-1-1,50-1-2,49-1-1,12-1-67,12-1-101,19-1-03298&offset=200&limit=100")
 	urls := []string{pagina1, pagina2, pagina3, pagina4, pagina5, pagina6}
 	mockRestClient := inicializarMockRestClient(mockCtrl, toallitas, urls)
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	toallitasObtenidas, err := preciosClarosClient.ObtenerListaDeToallitas(preciosclaros.Sucursales62)
@@ -211,7 +215,7 @@ func TestObtenerListaDePreciosDeUnProductoConPaginado(t *testing.T) {
 		"../archivos-test/precios-tampones-12-sucursales.json"},
 		[]string{fmt.Sprintf(pathProductoConPaginado, 7891010604943, strings.Join(preciosclaros.Sucursales62[0:50], ",")),
 			fmt.Sprintf(pathProductoConPaginado, 7891010604943, strings.Join(preciosclaros.Sucursales62[50:], ","))})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(preciosclaros.Sucursales62, []int{7891010604943}, "Tampones")
@@ -232,7 +236,7 @@ func TestObtenerListaDePreciosDeUnProductoSinPrecioEnUnaSucursal(t *testing.T) {
 	defer mockCtrl.Finish()
 	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905-sin-precio.json"},
 		[]string{fmt.Sprintf(pathProducto, 7891010604905)})
-	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+	preciosClarosClient := preciosclaros.NewClient(&CeroSegundos{}, mockRestClient)
 
 	// Operación
 	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(sucursales, tampones, "Tampones")
