@@ -222,6 +222,27 @@ func TestObtenerListaDePreciosDeUnProductoConPaginado(t *testing.T) {
 	assert.Nil(t, err)
 }
 
+func TestObtenerListaDePreciosDeUnProductoSinPrecioEnUnaSucursal(t *testing.T) {
+
+	// Inicialización
+	listaDePreciosEsperada := generarListaDePreciosTamponesSinPrecioEnUnaSucursal()
+	sucursales := []string{"15-1-1803", "15-1-8009"}
+	tampones := []int{7891010604905}
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+	mockRestClient := inicializarMockRestClient(mockCtrl, []string{"../archivos-test/precios-tampones-7891010604905-sin-precio.json"},
+		[]string{fmt.Sprintf(pathProducto, 7891010604905)})
+	preciosClarosClient := preciosclaros.NewClient(mockRestClient)
+
+	// Operación
+	listaDePreciosObtenida, err := preciosClarosClient.ObtenerListaDePrecios(sucursales, tampones, "Tampones")
+
+	// Validación
+	assert.Len(t, listaDePreciosObtenida, 1)
+	assert.ElementsMatch(t, listaDePreciosEsperada, listaDePreciosObtenida, "las listas de precios no son iguales")
+	assert.Nil(t, err)
+}
+
 func inicializarMockRestClient(mockCtrl *gomock.Controller, paths []string, urls []string) *mock_precios_claros.MockRestClient {
 
 	mockRestClient := mock_precios_claros.NewMockRestClient(mockCtrl)
@@ -283,4 +304,15 @@ func generarListaDePreciosDeTamponesDe62Sucursales() []*preciosclaros.Producto {
 	}
 
 	return productos
+}
+
+func generarListaDePreciosTamponesSinPrecioEnUnaSucursal() []*preciosclaros.Producto {
+
+	var productos []*preciosclaros.Producto
+
+	unTampon := preciosclaros.Producto{"7891010604905", "Tampones", "OB", "Tampones Medio Helix Ob 20 Un",
+		"20.0 un", "DIA Argentina S.A", "1803 - Salta", "Radio Patagonia 0",
+		"Salta", 136.49}
+
+	return append(productos, &unTampon)
 }
