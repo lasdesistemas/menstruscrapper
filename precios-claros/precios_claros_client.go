@@ -19,7 +19,7 @@ func NewClient(rc RestClient) *PreciosClarosClient {
 }
 
 const (
-	host               = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
+	host               = "https://d3e6htiiul5ek9.cloudfront.net/prod"
 	pathSucursales     = "/sucursales"
 	pathProducto       = "/productos&id_categoria=%v"
 	pathPrecioProducto = "/producto"

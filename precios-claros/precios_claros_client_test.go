@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	host                     = "https://d3e6htiiul5ek9.cloudfront.net/prueba"
+	host                     = "https://d3e6htiiul5ek9.cloudfront.net/prod"
 	pathSucursales           = "/sucursales?offset=0&limit=30"
 	pathTampones             = "/productos&id_categoria=090215&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
 	pathToallitas            = "/productos&id_categoria=090216&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
