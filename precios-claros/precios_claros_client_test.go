@@ -172,7 +172,7 @@ func TestObtenerListaDeTamponesConPaginado(t *testing.T) {
 	tamponesObtenidos, err := preciosClarosClient.ObtenerListaDeTampones(preciosclaros.Sucursales62)
 
 	// Validación
-	assert.Len(t, tamponesObtenidos, 404)
+	assert.Len(t, tamponesObtenidos, 100)
 	assert.Equal(t, preciosclaros.TamponesEsperadosConPaginado, tamponesObtenidos, "los tampones no son iguales")
 	assert.Nil(t, err)
 }
@@ -200,7 +200,7 @@ func TestObtenerListaDeToallitasConPaginado(t *testing.T) {
 	toallitasObtenidas, err := preciosClarosClient.ObtenerListaDeToallitas(preciosclaros.Sucursales62)
 
 	// Validación
-	assert.Len(t, toallitasObtenidas, 404)
+	assert.Len(t, toallitasObtenidas, 100)
 	assert.Equal(t, preciosclaros.ToallitasEsperadasConPaginado, toallitasObtenidas, "los toallitas no son iguales")
 	assert.Nil(t, err)
 }

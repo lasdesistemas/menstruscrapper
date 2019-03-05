@@ -156,6 +156,10 @@ func (pc *PreciosClarosClient) obtenerProductos(categoria string, offset, limit 
 	pathProductoConCategoria := fmt.Sprintf(pathProducto, categoria)
 	response, err := pc.restClient.Get(host + pathProductoConCategoria + sucursalesQueryString + "&offset=" + offset + "&limit=" + limit)
 	defer response.Body.Close()
+	mapaProductos := make(map[int]int, 0)
+	for _, id := range *productos {
+		mapaProductos[id] = id
+	}
 
 	// Valida el resultado
 	if err != nil {
@@ -192,7 +196,9 @@ func (pc *PreciosClarosClient) obtenerProductos(categoria string, offset, limit 
 		id, err := strconv.Atoi(producto.Id)
 
 		if err == nil {
-			*productos = append(*productos, id)
+			if _, existeProducto := mapaProductos[id]; !existeProducto {
+				*productos = append(*productos, id)
+			}
 		} else {
 			fmt.Println("No se pudo convertir a int el id de producto: ", producto.Id)
 		}
