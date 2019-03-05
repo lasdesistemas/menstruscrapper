@@ -17,12 +17,12 @@ import (
 const (
 	host                     = "https://d3e6htiiul5ek9.cloudfront.net/prod"
 	pathSucursales           = "/sucursales?offset=0&limit=30"
-	pathTampones             = "/productos&id_categoria=090215&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
-	pathToallitas            = "/productos&id_categoria=090216&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
-	pathProducto             = "/producto&id_producto=%v&array_sucursales=15-1-1803,15-1-8009&limit=50"
-	pathTamponesConPaginado  = "/productos&id_categoria=090215&array_sucursales=%v"
-	pathToallitasConPaginado = "/productos&id_categoria=090216&array_sucursales=%v"
-	pathProductoConPaginado  = "/producto&id_producto=%v&array_sucursales=%v&limit=50"
+	pathTampones             = "/productos?id_categoria=090215&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
+	pathToallitas            = "/productos?id_categoria=090216&array_sucursales=15-1-1803,15-1-8009&offset=0&limit=100"
+	pathProducto             = "/producto?id_producto=%v&array_sucursales=15-1-1803,15-1-8009&limit=50"
+	pathTamponesConPaginado  = "/productos?id_categoria=090215&array_sucursales=%v"
+	pathToallitasConPaginado = "/productos?id_categoria=090216&array_sucursales=%v"
+	pathProductoConPaginado  = "/producto?id_producto=%v&array_sucursales=%v&limit=50"
 )
 
 type CeroSegundos struct{}

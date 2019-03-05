@@ -34,7 +34,7 @@ func NewClient(sleeper Sleeper, rc RestClient) *PreciosClarosClient {
 const (
 	host               = "https://d3e6htiiul5ek9.cloudfront.net/prod"
 	pathSucursales     = "/sucursales"
-	pathProducto       = "/productos&id_categoria=%v"
+	pathProducto       = "/productos?id_categoria=%v"
 	pathPrecioProducto = "/producto"
 )
 
@@ -94,6 +94,11 @@ func (pc *PreciosClarosClient) obtenerSucursales(offset, limit string, sucursale
 	}{}
 
 	json.Unmarshal(bodyBytes, &respuesta)
+
+	if respuesta.TotalPagina == 0 {
+		return 0, nil
+	}
+
 	paginas := int(math.Ceil(float64(respuesta.Total / respuesta.TotalPagina)))
 
 	for _, sucursal := range respuesta.Sucursales {
@@ -176,6 +181,12 @@ func (pc *PreciosClarosClient) obtenerProductos(categoria string, offset, limit 
 
 	json.Unmarshal(bodyBytes, &respuesta)
 
+	if respuesta.TotalPagina == 0 {
+		return 0, nil
+	}
+
+	paginas := int(math.Ceil(float64(respuesta.Total / respuesta.TotalPagina)))
+
 	// Convierto a lista de int
 	for _, producto := range respuesta.Productos {
 		id, err := strconv.Atoi(producto.Id)
@@ -186,8 +197,6 @@ func (pc *PreciosClarosClient) obtenerProductos(categoria string, offset, limit 
 			fmt.Println("No se pudo convertir a int el id de producto: ", producto.Id)
 		}
 	}
-
-	paginas := int(math.Ceil(float64(respuesta.Total / respuesta.TotalPagina)))
 
 	return paginas, nil
 }
@@ -262,7 +271,7 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 
 			sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales50, ",") + "&limit=50"
 			pc.sleeper.Sleep()
-			response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"&id_producto=%v", id) + sucursalesQueryString)
+			response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"?id_producto=%v", id) + sucursalesQueryString)
 
 			defer response.Body.Close()
 
