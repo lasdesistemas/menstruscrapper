@@ -115,7 +115,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeTampones(sucursales []string) ([]in
 
 	for len(sucursales) > 0 {
 
-		fmt.Printf("Buscando ids de tampones para %v sucursales...\n", len(sucursales))
+		fmt.Printf("Buscando ids de tampones, faltan %v sucursales...\n", len(sucursales))
 		if len(sucursales) > 50 {
 			sucursales50 = sucursales[0:50]
 			sucursales = sucursales[50:]
@@ -214,7 +214,7 @@ func (pc *PreciosClarosClient) ObtenerListaDeToallitas(sucursales []string) ([]i
 
 	for len(sucursales) > 0 {
 
-		fmt.Printf("Buscando ids de toallitas para %v sucursales...\n", len(sucursales))
+		fmt.Printf("Buscando ids de toallitas, faltan %v sucursales...\n", len(sucursales))
 		if len(sucursales) > 50 {
 			sucursales50 = sucursales[0:50]
 			sucursales = sucursales[50:]
