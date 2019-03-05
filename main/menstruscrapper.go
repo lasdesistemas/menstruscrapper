@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	cliente := preciosclaros.NewClient(&preciosclaros.CincoSegundos{}, &preciosclaros.PreciosClarosRestClient{})
+	cliente := preciosclaros.NewClient(&preciosclaros.Espera{}, &preciosclaros.PreciosClarosRestClient{})
 	scrapper := menstruscrapper.New(cliente)
 	scrapper.GenerarListaDePrecios()
 }
