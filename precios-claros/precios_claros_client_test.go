@@ -271,11 +271,11 @@ func generarListaDePreciosTampones() []*preciosclaros.Producto {
 
 	unTampon := preciosclaros.Producto{"7891010604905", "Tampones", "OB", "Tampones Medio Helix Ob 20 Un",
 		"20.0 un", "DIA Argentina S.A", "1803 - Salta", "Radio Patagonia 0",
-		"Salta", 136.49}
+		"Salta", "Salta", 136.49}
 
 	otroTampon := preciosclaros.Producto{"7891010604905", "Tampones", "OB", "Tampones Medio Helix Ob 20 Un",
 		"20.0 un", "DIA Argentina S.A", "8009 - Salta", "Sarmiento 0",
-		"Salta", 136.49}
+		"Salta", "Salta", 136.49}
 
 	return append(productos, &unTampon, &otroTampon)
 }
@@ -286,11 +286,11 @@ func generarListaDePreciosDosTampones() []*preciosclaros.Producto {
 
 	unTampon := preciosclaros.Producto{"7891010604943", "Tampones", "OB", "Tampones Medio Pro Comfort Ob 10 Un",
 		"10.0 un", "DIA Argentina S.A", "1803 - Salta", "Radio Patagonia 0",
-		"Salta", 90.99}
+		"Salta", "Salta", 90.99}
 
 	otroTampon := preciosclaros.Producto{"7891010604943", "Tampones", "OB", "Tampones Medio Pro Comfort Ob 10 Un",
 		"10.0 un", "DIA Argentina S.A", "8009 - Salta", "Sarmiento 0",
-		"Salta", 90.99}
+		"Salta", "Salta", 90.99}
 
 	return append(productos, &unTampon, &otroTampon)
 }
@@ -303,7 +303,7 @@ func generarListaDePreciosDeTamponesDe62Sucursales() []*preciosclaros.Producto {
 
 		unTampon := preciosclaros.Producto{"7891010604943", "Tampones", "OB", "Tampones Medio Pro Comfort Ob 10 Un",
 			"10.0 un", "DIA Argentina S.A", "1803 - Salta", "Radio Patagonia 0",
-			"Salta", 90.99}
+			"Salta", "Salta", 90.99}
 		productos = append(productos, &unTampon)
 	}
 
@@ -316,7 +316,7 @@ func generarListaDePreciosTamponesSinPrecioEnUnaSucursal() []*preciosclaros.Prod
 
 	unTampon := preciosclaros.Producto{"7891010604905", "Tampones", "OB", "Tampones Medio Helix Ob 20 Un",
 		"20.0 un", "DIA Argentina S.A", "1803 - Salta", "Radio Patagonia 0",
-		"Salta", 136.49}
+		"Salta", "Salta", 136.49}
 
 	return append(productos, &unTampon)
 }

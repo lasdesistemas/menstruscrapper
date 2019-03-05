@@ -15,11 +15,11 @@ type Sleeper interface {
 	Sleep()
 }
 
-type CincoSegundos struct {
+type Espera struct {
 }
 
-func (cs *CincoSegundos) Sleep() {
-	time.Sleep(time.Second * 5)
+func (cs *Espera) Sleep() {
+	time.Sleep(time.Second * 1)
 }
 
 type PreciosClarosClient struct {
@@ -37,6 +37,33 @@ const (
 	pathProducto       = "/productos?id_categoria=%v"
 	pathPrecioProducto = "/producto"
 )
+
+var provincias = map[string]string{
+	"AR-A": "Salta",
+	"AR-B": "Buenos Aires",
+	"AR-C": "CABA",
+	"AR-D": "San Luis",
+	"AR-E": "Entre Ríos",
+	"AR-F": "La Rioja",
+	"AR-G": "Santiago del Estero",
+	"AR-H": "Chaco",
+	"AR-J": "San Juan",
+	"AR-K": "Catamarca",
+	"AR-L": "La Pampa",
+	"AR-M": "Mendoza",
+	"AR-N": "Misiones",
+	"AR-P": "Formosa",
+	"AR-Q": "Neuquén",
+	"AR-R": "Río Negro",
+	"AR-S": "Santa Fe",
+	"AR-T": "Tucumán",
+	"AR-U": "Chubut",
+	"AR-V": "Tierra del Fuego",
+	"AR-W": "Corrientes",
+	"AR-X": "Córdoba",
+	"AR-Y": "Jujuy",
+	"AR-Z": "Santa Cruz",
+}
 
 func (pc *PreciosClarosClient) ObtenerSucursales() ([]string, error) {
 
@@ -258,7 +285,7 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 
 	for len(sucursales) > 0 {
 
-		fmt.Printf("Buscando precios para %v sucursales...\n", len(sucursales))
+		fmt.Printf("Buscando precios, faltan %v sucursales...\n", len(sucursales))
 
 		if len(sucursales) > 50 {
 			sucursales50 = sucursales[0:50]
@@ -270,9 +297,9 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 
 		for i, id := range productos {
 
-			resto := math.Mod(float64(i), float64(100))
+			resto := math.Mod(float64(i), float64(10))
 			if resto == 0 {
-				fmt.Printf("%v productos procesados ", i)
+				fmt.Printf("%v productos procesados.. ", i)
 			}
 
 			sucursalesQueryString := "&array_sucursales=" + strings.Join(sucursales50, ",") + "&limit=50"
@@ -325,11 +352,17 @@ func (pc *PreciosClarosClient) generarRenglonProducto(sucursal *Sucursal, produc
 
 	precioProducto = producto
 
-	precioProducto.Categoria = categoria
-	precioProducto.Comercio = sucursal.Comercio
-	precioProducto.Sucursal = sucursal.Nombre
-	precioProducto.Direccion = sucursal.Direccion
-	precioProducto.Localidad = sucursal.Localidad
+	provincia, existe := provincias[sucursal.Provincia]
+	if !existe {
+		provincia = sucursal.Provincia
+	}
+
+	precioProducto.Categoria = strings.Replace(categoria, ",", " ", -1)
+	precioProducto.Comercio = strings.Replace(sucursal.Comercio, ",", " ", -1)
+	precioProducto.Sucursal = strings.Replace(sucursal.Nombre, ",", " ", -1)
+	precioProducto.Direccion = strings.Replace(sucursal.Direccion, ",", " ", -1)
+	precioProducto.Localidad = strings.Replace(sucursal.Localidad, ",", " ", -1)
+	precioProducto.Provincia = provincia
 	precioProducto.PrecioDeLista = sucursal.PreciosProducto.PrecioLista
 
 	return &precioProducto

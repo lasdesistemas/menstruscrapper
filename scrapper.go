@@ -78,7 +78,7 @@ func (s *Scrapper) GenerarListaDePrecios() string {
 
 func (s *Scrapper) generarCsv(preciosTampones, preciosToallitas []*preciosclaros.Producto) (string, error) {
 
-	listaDePrecios := "Categoría,Marca,Nombre,Presentación,Comercio,Sucursal,Dirección,Localidad,Precio de lista\n"
+	listaDePrecios := "Categoría,Marca,Nombre,Presentación,Comercio,Sucursal,Dirección,Localidad,Provincia,Precio de lista\n"
 
 	listaDePrecios = generarListaDePrecios(preciosTampones, listaDePrecios)
 	listaDePrecios = generarListaDePrecios(preciosToallitas, listaDePrecios)
@@ -97,7 +97,7 @@ func generarListaDePrecios(productos []*preciosclaros.Producto, listaDePrecios s
 	for _, producto := range productos {
 
 		linea := strings.Join([]string{producto.Categoria, producto.Marca, producto.Nombre, producto.Presentacion, producto.Comercio,
-			producto.Sucursal, producto.Direccion, producto.Localidad, fmt.Sprintf("%.2f", producto.PrecioDeLista)}, ",")
+			producto.Sucursal, producto.Direccion, producto.Localidad, producto.Provincia, fmt.Sprintf("%.2f", producto.PrecioDeLista)}, ",")
 
 		listaDePrecios = listaDePrecios + linea + "\n"
 	}
