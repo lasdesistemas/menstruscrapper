@@ -306,12 +306,12 @@ func (pc *PreciosClarosClient) ObtenerListaDePrecios(sucursales []string, produc
 			pc.sleeper.Sleep()
 			response, err := pc.restClient.Get(host + fmt.Sprintf(pathPrecioProducto+"?id_producto=%v", id) + sucursalesQueryString)
 
-			defer response.Body.Close()
-
 			// Valida el resultado
 			if err != nil {
 				return nil, err
 			}
+
+			defer response.Body.Close()
 
 			if response.StatusCode != http.StatusOK {
 				return nil, fmt.Errorf("el pedido dio status: %v", response.StatusCode)
